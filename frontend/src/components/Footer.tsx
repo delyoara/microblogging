@@ -44,63 +44,63 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Section 2: A propos Links */}
-        {/* On smaller screens (col-1), make text center. On larger, keep it left. */}
-        <div className="flex flex-col space-y-4 items-center text-center md:items-start md:text-left">
-          <h4 className="font-josefin text-lg font-bold text-gray-900 mb-2">
-            A propos
-          </h4>
-          <ul className="space-y-2">
-            <li>
-              <Link
-                href="/"
-                className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/bien-etre" // Ensure consistent slug format
-                className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-              >
-                Bien être
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/culture"
-                className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-              >
-                Culture
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/voyage"
-                className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-              >
-                Voyage
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/voiture"
-                className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-              >
-                Voiture
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
+       {/* Section 2: A propos Links */}
+<div className="flex flex-col space-y-4 items-center text-center md:items-start md:text-left">
+  <h4 className="font-josefin text-lg font-bold text-gray-900 mb-2">
+    A propos
+  </h4>
+  <ul className="grid grid-cols-2 gap-x-8 gap-y-2">
+    <li>
+      <Link
+        href="/"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Home
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/bien-etre"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Bien être
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/culture"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Culture
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/voyage"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Voyage
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/voiture"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Voiture
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/contact"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Contact
+      </Link>
+    </li>
+  </ul>
+</div>
+
 
         {/* Section 3: Newsletter */}
         {/* On smaller screens (col-1), make text center. On larger, keep it left. */}

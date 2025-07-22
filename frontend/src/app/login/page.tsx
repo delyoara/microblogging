@@ -3,10 +3,7 @@ import LoginForm from "@/components/LoginForm";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata = {
-  title: "Connexion", // Traduit le titre
-  description: "Connectez-vous à votre compte", // Traduit la description
-};
+
 
 const LoginPage: React.FC = () => {
   return (

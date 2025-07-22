@@ -11,10 +11,7 @@ const josefin = Josefin_Sans({ subsets: ['latin'], weight: ['400', '700'], varia
 // Montserrat for paragraphs
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-montserrat' }); // Add variable
 
-export const metadata = {
-  title: 'Minimalistique',
-  description: 'Landing page simple & élégante',
-};
+
 
 export default function RootLayout({
   children,
