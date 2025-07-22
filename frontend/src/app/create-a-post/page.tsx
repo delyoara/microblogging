@@ -1,23 +1,35 @@
-"use client"; 
+"use client";
 
+import { useState } from "react";
 import Header from "@/components/Header";
-import { Container } from "lucide";
+import CreateAPost from "@/components/createAPost";
 
 
+export default function PostPage() {
+  // États requis par CreateAPost
+  const [sujet, setSujet] = useState("");
+  const [categorie_type, setCategorieType] = useState("");
+  const [body, setBody] = useState("");
 
-export default function post() {
+  const handleSubmit = () => {
+    console.log("Formulaire soumis :", {
+      sujet,
+      categorie_type,
+      body,
+    });
+  };
+
+  const handleReset = () => {
+    setSujet("");
+    setCategorieType("");
+    setBody("");
+  };
+
   return (
     <main className="relative min-h-screen">
       <Header />
-<div>
-<div className="px-20 max-w-5xl bg-green-200 text-center">
-create a post
-</div>
-
-</div>
-
+ 
+<CreateAPost/>
     </main>
-
-    
   );
 }
