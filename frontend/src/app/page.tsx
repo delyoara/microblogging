@@ -3,6 +3,7 @@
 import Header from "@/components/Header";
 import ThemeSection from "@/components/ThemeSection";
 import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -46,6 +47,7 @@ export default function Home() {
           Ensemble, nous avons décidé de créer ce microblogging pour partager ce
           qui nous fait vibrer, chacun·e dans son univers.
         </p>
+        <br/>
         Vanessa vous emmène en voyage, à la découverte de paysages, de cultures
         locales et de petits coins de paradis.
         <br />
@@ -72,6 +74,7 @@ export default function Home() {
       </motion.div>
 
       <ThemeSection />
+      <Footer></Footer>
     </main>
   );
 }

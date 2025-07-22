@@ -1,16 +1,21 @@
+// src/components/Header.tsx
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react"; // Only Menu and X are needed
 
-export default function Header() {
+// Définir les types des props du Header
+interface HeaderProps {
+  hideSignUpButton?: boolean; // Rendre la prop optionnelle
+}
+
+export default function Header({ hideSignUpButton }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav className="bg-white relative">
       {/* Top section: Title and Tagline */}
-      <div className="flex flex-col items-center justify-center py-8
-      ">
+      <div className="flex flex-col items-center justify-center py-8">
         <h1 className="text-6xl font-serif font-bold text-black mb-2">
           FlashPost
         </h1>
@@ -19,15 +24,17 @@ export default function Header() {
         </p>
 
         {/* Sign Up button at the top right for DESKTOP ONLY */}
-        {/* This will be hidden on mobile, and the button will appear in the mobile menu */}
-        <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
-          <Link
-            href="/signup"
-            className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200"
-          >
-            Sign Up
-          </Link>
-        </div>
+        {/* Ce bouton est masqué si hideSignUpButton est vrai */}
+        {!hideSignUpButton && ( // Condition pour masquer le bouton
+          <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
+            <Link
+              href="/login"
+              className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200"
+            >
+              Login  {/* Traduit le texte */}
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Navigation Section */}
@@ -50,12 +57,11 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation Links (centered on desktop) */}
-          {/* On desktop, this will take up available space and justify-center will center the links */}
           <div className="hidden md:flex flex-grow justify-center space-x-8 text-gray-700 text-lg">
             <Link href="/" className="hover:text-black">
               Home
             </Link>
-            <Link href="/bien être" className="hover:text-black">
+            <Link href="/bien-etre" className="hover:text-black"> {/* Correction du slug */}
               Bien être
             </Link>
             <Link href="/culture" className="hover:text-black">
@@ -68,8 +74,6 @@ export default function Header() {
               Voiture
             </Link>
           </div>
-
-        
         </div>
 
         {/* Mobile Menu Overlay */}
@@ -79,13 +83,16 @@ export default function Header() {
           } flex-col items-center space-y-4 md:hidden`}
         >
           {/* Sign Up button inside mobile menu (visible ONLY when menu is open) */}
-          <Link
-            href="/signup"
-            className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200 mb-4"
-            onClick={() => setIsMenuOpen(false)} // Close menu after click
-          >
-            Sign Up
-          </Link>
+          {/* Ce bouton est masqué si hideSignUpButton est vrai */}
+          {!hideSignUpButton && ( // Condition pour masquer le bouton
+            <Link
+              href="/login"
+              className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200 mb-4"
+              onClick={() => setIsMenuOpen(false)} // Close menu after click
+            >
+              S'INSCRIRE {/* Traduit le texte */}
+            </Link>
+          )}
 
           {/* Existing mobile menu links */}
           <Link
@@ -96,7 +103,7 @@ export default function Header() {
             Home
           </Link>
           <Link
-            href="/bien être"
+            href="/bien-etre" // Correction du slug
             className="text-gray-700 text-lg hover:text-black"
             onClick={() => setIsMenuOpen(false)}
           >

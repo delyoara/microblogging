@@ -12,25 +12,25 @@ const themes: Theme[] = [
     name: "Culture",
     description: "Cinéma, livres, art & expos.",
     bgColor: "#f9fafb",
-    image: "/images/culture.jpg",
+    image: "/cinema.jpg",
   },
   {
     name: "Voyage",
     description: "Découvertes et coins de paradis.",
-    bgColor: "#f0f9ff",
-    image: "/images/travel.jpg",
+    bgColor: "#f9fafb",
+    image: "/voyage.jpg",
   },
   {
     name: "Bien-être",
     description: "Équilibre, rituels & conscience.",
-    bgColor: "#fefce8",
-    image: "/images/wellness.jpg",
+    bgColor: "#f9fafb",
+    image: "/bien.jpg",
   },
   {
     name: "Automobile",
     description: "Tuning, lifestyle & mécaniques.",
-    bgColor: "#fff1f2",
-    image: "/images/automobile.jpg",
+    bgColor: "#f9fafb",
+    image: "/car.jpg",
   },
 ];
 
@@ -52,6 +52,8 @@ const ThemeSection: React.FC = () => {
             className="relative shadow-xl rounded-2xl p-4 text-center overflow-hidden group flex flex-col justify-between"
             style={{ backgroundColor: theme.bgColor }}
           >
+
+            {/* photo */}
             <div className="flex-grow flex items-center justify-center mb-4">
               <img
                 src={theme.image}
@@ -60,6 +62,7 @@ const ThemeSection: React.FC = () => {
               />
             </div>
 
+{/* text */}
             <div className="px-2 pb-2">
               <h3 className="text-xl font-semibold mb-2 text-gray-800">
                 {theme.name}
