@@ -7,6 +7,7 @@ const app = express();
 const port = 3001;
 
 
+app.use(express.json());
 app.use(cors());
 app.use('/api/posts', postsRoutes);
 app.use('/api/users', usersRoutes);
