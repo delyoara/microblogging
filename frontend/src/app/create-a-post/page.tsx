@@ -9,12 +9,12 @@ export default function post() {
   return (
     <main className="relative min-h-screen">
       <Header />
-<body>
-<div className="px-20 py-20 bg-green-200 text-center">
+<div>
+<div className="px-20 max-w-5xl bg-green-200 text-center">
 create a post
 </div>
 
-</body>
+</div>
 
     </main>
 
