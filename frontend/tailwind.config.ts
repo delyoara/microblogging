@@ -8,10 +8,13 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        montserrat: ['Montserrat', 'sans-serif'],
+        inter: ['var(--font-inter)'],
+        josefin: ['var(--font-josefin)'],
+        montserrat: ['var(--font-montserrat)'],
       },
     },
   },
   plugins: [],
 };
 
+export default config;
