@@ -1,8 +1,15 @@
-const express = require('express')
-const app = express()
-const port = 3000
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import postsRoutes from './routes/posts.js';
+import usersRoutes from './routes/users.js';
+
+const app = express();
+const port = 3000;
+
+
 app.use(cors());
+app.use('/api/posts', postsRoutes);
+app.use('/api/users', usersRoutes);
 
 app.get('/', (req, res) => {
   res.send('La vie est belle!')
