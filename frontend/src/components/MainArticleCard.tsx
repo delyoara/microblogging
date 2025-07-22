@@ -1,26 +1,29 @@
 // src/components/MainArticleCard.tsx
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+// Remove Link import as it's no longer needed inside this component
+// import Link from 'next/link';
 
 interface MainArticleCardProps {
+  slug: string;
   imageUrl: string;
   altText: string;
   category: string;
   title: string;
   description: string;
-  authorAvatarUrl: string;
   authorName: string;
+  content: string;
 }
 
 const MainArticleCard: React.FC<MainArticleCardProps> = ({
+  slug,
   imageUrl,
   altText,
   category,
   title,
   description,
-  authorAvatarUrl,
   authorName,
+  content,
 }) => {
   return (
     <article className="bg-white rounded-lg overflow-hidden flex flex-col">
@@ -42,9 +45,8 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
           {category}
         </span>
         <h3 className="font-josefin text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-4">
-          <Link href={`/articles/${title.toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-orange-500 transition-colors duration-200">
-            {title}
-          </Link>
+          {/* Remove the Link component here */}
+          {title}
         </h3>
         <p className="font-montserrat text-base text-gray-600 mb-6 flex-grow">
           {description}
@@ -52,16 +54,6 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
 
         {/* Author */}
         <div className="flex items-center">
-          <div className="relative w-8 h-8 rounded-full overflow-hidden mr-3">
-            <Image
-              src={authorAvatarUrl}
-              alt={authorName}
-              fill
-              sizes="32px"
-              style={{ objectFit: 'cover' }}
-              className="rounded-full"
-            />
-          </div>
           <span className="font-montserrat text-sm font-semibold text-gray-800">
             By {authorName}
           </span>

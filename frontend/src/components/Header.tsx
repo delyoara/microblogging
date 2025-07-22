@@ -90,7 +90,7 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
               className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200 mb-4"
               onClick={() => setIsMenuOpen(false)} // Close menu after click
             >
-              S'INSCRIRE {/* Traduit le texte */}
+              Login {/* Traduit le texte */}
             </Link>
           )}
 
