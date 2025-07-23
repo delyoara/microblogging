@@ -1,18 +1,18 @@
 import express from 'express';
 import {
-  getAllCategories,
-  getCategoryById,
-  createCategory,
-  updateCatgory,
-  deleteCategory,
-  updateCategory,
-} from '../controllers/categoryController';
+  getAllThemes,
+  getThemeById,
+  createTheme,
+  updateTheme,
+  deleteTheme
+} from '../controllers/themeController.js';
 
 const router = express.Router();
-router.get('/', getAllCategories);
-router.get('/:id', getCategoryById);
-router.post('/', createCategory);
-router.put('/:id', updateCategory);
-router.delete('/:id', deleteCategory);
+
+router.get('/', getAllThemes);
+router.get('/:id', getThemeById);
+router.post('/', createTheme);
+router.put('/:id', updateTheme);
+router.delete('/:id', deleteTheme);
 
 export default router;
