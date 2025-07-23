@@ -1,29 +1,27 @@
 // src/components/MainArticleCard.tsx
 import React from 'react';
 import Image from 'next/image';
-// Remove Link import as it's no longer needed inside this component
-// import Link from 'next/link';
 
 interface MainArticleCardProps {
   slug: string;
   imageUrl: string;
   altText: string;
-  category: string;
+  categoryName: string;
   title: string;
   description: string;
   authorName: string;
-  content: string;
+  content?: string; // <-- Ici, ajoutez le '?' pour le rendre optionnel
 }
 
 const MainArticleCard: React.FC<MainArticleCardProps> = ({
   slug,
   imageUrl,
   altText,
-  category,
+  categoryName,
   title,
   description,
   authorName,
-  content,
+  content, // 'content' est maintenant potentiellement undefined
 }) => {
   return (
     <article className="bg-white rounded-lg overflow-hidden flex flex-col">
@@ -42,10 +40,9 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <span className="font-montserrat text-sm text-gray-500 uppercase tracking-wider mb-2">
-          {category}
+          {categoryName}
         </span>
         <h3 className="font-josefin text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-4">
-          {/* Remove the Link component here */}
           {title}
         </h3>
         <p className="font-montserrat text-base text-gray-600 mb-6 flex-grow">
@@ -58,6 +55,12 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
             By {authorName}
           </span>
         </div>
+        {/* Si vous affichez 'content' dans MainArticleCard,
+            vous devrez le vérifier avant de l'afficher car il peut être undefined.
+            Cependant, MainArticleCard est un aperçu, donc 'content' n'est généralement
+            pas affiché ici mais sur la page de l'article complet.
+            Si vous n'affichez pas 'content' dans MainArticleCard, vous n'avez pas d'autres changements à faire ici.
+        */}
       </div>
     </article>
   );

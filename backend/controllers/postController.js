@@ -1,91 +1,80 @@
-import express from 'express';
-import {
-  getAllPosts,
-  getPostById,
-  createPost,
-  updatePost,
-  deletePost
-} from '../controllers/postController.js';
+import prisma from '../lib/prisma.js';
 
-const router = express.Router();
-
-// Récupérer tous les posts
-router.get('/', async (req, res) => {
+// GET /api/posts
+export const getAllPosts = async (req, res) => {
   try {
     const posts = await prisma.post.findMany({
       include: {
         user: true,
-        theme: true,
+        category: true, // si tu as remplacé theme par category
         comments: true,
         likes: true,
-      }
+      },
     });
     res.json(posts);
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la récupération des posts' });
   }
-});
+};
 
-// Récupérer un post par son ID
-router.get('/:id', async (req, res) => {
+// GET /api/posts/:id
+export const getPostById = async (req, res) => {
   const postId = parseInt(req.params.id);
   try {
     const post = await prisma.post.findUnique({
       where: { id: postId },
       include: {
         user: true,
-        theme: true,
+        category: true,
         comments: true,
         likes: true,
-      }
+      },
     });
-
     if (!post) return res.status(404).json({ error: 'Post non trouvé' });
-
     res.json(post);
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la récupération du post' });
   }
-});
+};
 
-// Créer un nouveau post
-router.post('/', async (req, res) => {
-  const { userId, content, themeId } = req.body;
+// POST /api/posts
+export const createPost = async (req, res) => {
+  const { userId, content, categoryId } = req.body;
   try {
     const newPost = await prisma.post.create({
       data: {
         userId,
         content,
-        themeId,
+        categoryId,
       },
     });
     res.status(201).json(newPost);
   } catch (error) {
     res.status(400).json({ error: 'Erreur lors de la création du post' });
   }
-});
+};
 
-// Modifier un post existant
-router.put('/:id', async (req, res) => {
+// PUT /api/posts/:id
+export const updatePost = async (req, res) => {
   const postId = parseInt(req.params.id);
-  const { content, themeId } = req.body;
+  const { content, categoryId } = req.body;
 
   try {
     const updatedPost = await prisma.post.update({
       where: { id: postId },
       data: {
         content,
-        themeId,
+        categoryId,
       },
     });
     res.json(updatedPost);
   } catch (error) {
     res.status(400).json({ error: 'Erreur lors de la modification du post' });
   }
-});
+};
 
-// Supprimer un post
-router.delete('/:id', async (req, res) => {
+// DELETE /api/posts/:id
+export const deletePost = async (req, res) => {
   const postId = parseInt(req.params.id);
   try {
     await prisma.post.delete({ where: { id: postId } });
@@ -93,6 +82,4 @@ router.delete('/:id', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: 'Erreur lors de la suppression du post' });
   }
-});
-
-export default router;
+};
