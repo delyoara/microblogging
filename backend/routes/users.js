@@ -1,3 +1,5 @@
+import { authenticateToken } from '../middleware/authMiddleware.js';
+
 import express from 'express';
 import {
   getAllUsers,
@@ -9,8 +11,8 @@ import {
 
 const router = express.Router();
 
-router.get('/', getAllUsers);
-router.get('/:id', getUserById);
+router.get('/', authenticateToken, getAllUsers);
+router.get('/:id', authenticateToken, getUserById);
 router.post('/', createUser);
 router.put('/:id', updateUser);
 router.delete('/:id', deleteUser);

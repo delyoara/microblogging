@@ -1,4 +1,8 @@
 
+import dotenv from 'dotenv';
+dotenv.config();
+console.log("✅ JWT_SECRET =", process.env.JWT_SECRET);
+
 import express from 'express';
 import cors from 'cors';
 import postsRoutes from './routes/posts.js';
