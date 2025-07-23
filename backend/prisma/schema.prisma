@@ -25,7 +25,7 @@ model User {
 
 model Post {
   id          Int       @id @default(autoincrement())
-  userId      Int
+  userId      Int?
   themeId     Int
   categoryId  Int
   title       String
@@ -39,7 +39,7 @@ model Post {
   likes       Like[]
   category    Category  @relation(fields: [categoryId], references: [id])
   theme       Theme     @relation(fields: [themeId], references: [id])
-  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Theme {
