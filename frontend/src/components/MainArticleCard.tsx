@@ -33,9 +33,11 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
           style={{ objectFit: 'cover' }}
-          className="rounded-t-lg"
+                className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500"
         />
       </div>
+
+
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
@@ -55,6 +57,7 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
             By {authorName}
           </span>
         </div>
+        
         {/* Si vous affichez 'content' dans MainArticleCard,
             vous devrez le vérifier avant de l'afficher car il peut être undefined.
             Cependant, MainArticleCard est un aperçu, donc 'content' n'est généralement
