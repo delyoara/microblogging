@@ -122,11 +122,11 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           {/* Image */}
           {article.imageUrl && (
-            <div className="mb-12 group">
+            <div className="mb-12 **group**"> {/* Keep the 'group' class here */}
               <img
                 src={article.imageUrl}
                 alt={article.altText}
-                className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500"
+                className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 **grayscale transition-all duration-500 group-hover:grayscale-0**"
               />
             </div>
           )}

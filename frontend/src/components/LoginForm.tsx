@@ -19,7 +19,7 @@ const LoginForm: React.FC = () => {
     <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full transform transition-all duration-300 hover:scale-105">
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
-          <div className="relative flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition-all duration-200">
+          <div className="relative flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-orange-500 focus-within:border-transparent transition-all duration-200">
             <span className="absolute left-3 text-gray-400">
               <FaUser className="text-lg" />
             </span>
@@ -34,7 +34,7 @@ const LoginForm: React.FC = () => {
           </div>
         </div>
         <div className="mb-8">
-          <div className="relative flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent transition-all duration-200">
+          <div className="relative flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-orange-500 focus-within:border-transparent transition-all duration-200">
             <span className="absolute left-3 text-gray-400">
               <FaLock className="text-lg" />
             </span>
@@ -50,7 +50,7 @@ const LoginForm: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-black text-white py-3 rounded-md font-semibold text-lg hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 shadow-md"
+          className="w-full bg-black text-white py-3 rounded-md font-semibold text-lg hover:bg-orange-500"
         >
           Se connecter
         </button>
