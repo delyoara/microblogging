@@ -11,6 +11,8 @@ import commentRoutes from './routes/comments.js';
 import themeRoutes from './routes/themes.js';
 import authRoutes from './routes/auth.js';
 
+
+
 const app = express();
 const port = 3001;
 
