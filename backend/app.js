@@ -1,4 +1,3 @@
-
 import express from 'express';
 import cors from 'cors';
 import postsRoutes from './routes/posts.js';
