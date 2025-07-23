@@ -24,7 +24,6 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
         </p>
 
         {/* Sign Up button at the top right for DESKTOP ONLY */}
-<<<<<<< HEAD
 
         {/* This will be hidden on mobile, and the button will appear in the mobile menu */}
         <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
@@ -46,9 +45,6 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
 
         {/* Ce bouton est masqué si hideSignUpButton est vrai */}
         {!hideSignUpButton && ( // Condition pour masquer le bouton
-=======
-        {!hideSignUpButton && (
->>>>>>> 23fcc4fa1d8350528cfb1f09f52d23033cfceef8
           <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
             <Link
               href="/login"
