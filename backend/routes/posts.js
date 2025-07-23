@@ -127,19 +127,20 @@ router.get("/:slug", async (req, res) => {
 
 // POST /api/posts
 router.post("/", async (req, res) => {
-  const { userId, themeId, categoryId, title, description, imageUrl, altText, slug, content } = req.body;
+  const { userId, themeId, categoryName, title, description, imageUrl, altText, slug, content } = req.body;
 
   // Validation simple (tu peux améliorer)
-  if (!userId || !themeId || !categoryId || !title || !description || !slug || !content) {
+  // a changer quand Petronela mets l'user pour que cahque post soit propore a chaque user!!!! METRE !userId,
+  if ( !themeId || !categoryName || !title || !description || !slug || !content) {
     return res.status(400).json({ error: "Champs obligatoires manquants." });
   }
 
   try {
     const newPost = await prisma.post.create({
       data: {
-        userId,
+        userId: userId || null, // autoriser NULL
         themeId,
-        categoryId,
+        categoryName,
         title,
         description,
         imageUrl: imageUrl || "", // facultatif
