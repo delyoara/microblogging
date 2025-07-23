@@ -12,6 +12,7 @@ export default function CreateAPost() {
   const [body, setBody] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [themeId, setThemeId] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleReset = () => {
     setTitle("");
@@ -20,51 +21,88 @@ export default function CreateAPost() {
     setThemeId("");
   };
 
+  // Fonction pour créer un slug valide
+  const createSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .trim()
+      .replace(/[àáâãäå]/g, 'a')
+      .replace(/[èéêë]/g, 'e')
+      .replace(/[ìíîï]/g, 'i')
+      .replace(/[òóôõö]/g, 'o')
+      .replace(/[ùúûü]/g, 'u')
+      .replace(/[ç]/g, 'c')
+      .replace(/[^a-z0-9\s-]/g, '') // Supprimer les caractères spéciaux
+      .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
+      .replace(/-+/g, '-') // Supprimer les tirets multiples
+      .replace(/^-|-$/g, ''); // Supprimer les tirets en début/fin
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    if (isSubmitting) return; // Empêcher la double soumission
+    
+    setIsSubmitting(true);
+
+    // Validation côté client
+    if (!title.trim() || !body.trim() || !categoryName.trim() || !themeId) {
+      alert("Veuillez remplir tous les champs obligatoires.");
+      setIsSubmitting(false);
+      return;
+    }
 
     const formData = {
-      userId: null, // ou ton user ID réel s'il est disponible
+      userId: 3,
       themeId: parseInt(themeId),
-      categoryName: categoryName,
-      title: title,
-      description: body.slice(0, 150),
+      categoryName: categoryName.trim(),
+      title: title.trim(),
+      description: body.trim().slice(0, 150),
       imageUrl: "",
-      altText: "",
-      slug: title.toLowerCase().replace(/\s+/g, "-"),
-      content: body,
+      altText: createSlug(title),
+      slug: createSlug(title),
+      content: body.trim(),
     };
 
     console.log("Données envoyées :", formData);
 
-  try {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
-  });
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts`, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData),
+      });
 
-  let data = null;
+      let data = null;
 
-  if (res.headers.get("content-type")?.includes("application/json")) {
-    data = await res.json(); // Lis le JSON UNE SEULE FOIS
-  } else {
-    data = await res.text();
-  }
+      if (res.headers.get("content-type")?.includes("application/json")) {
+        data = await res.json();
+      } else {
+        data = await res.text();
+      }
 
-  console.log("Réponse du serveur :", data);
+      console.log("Réponse du serveur :", data);
 
-  if (res.ok) {
-    handleReset();
-    router.push("/confirmationform");
-  } else {
-    console.error("Erreur HTTP :", res.status);
-    console.error("Détails :", data);
-  }
-} catch (error) {
-  console.error("Erreur de réseau ou JS :", error);
-}
-
+      if (res.ok) {
+        alert("Article créé avec succès !");
+        handleReset();
+        router.push("/confirmationform");
+      } else {
+        // Afficher l'erreur spécifique du serveur
+        const errorMessage = typeof data === 'object' && data.error 
+          ? data.error 
+          : "Erreur lors de la création de l'article";
+        alert(errorMessage);
+        console.error("Erreur HTTP :", res.status, data);
+      }
+    } catch (error) {
+      console.error("Erreur de réseau ou JS :", error);
+      alert("Erreur de connexion. Veuillez réessayer.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -88,7 +126,9 @@ export default function CreateAPost() {
 
             {/* Titre */}
             <div className="flex items-center gap-4">
-              <label htmlFor="title" className="w-32 text-right">Titre :</label>
+              <label htmlFor="title" className="w-32 text-right">
+                Titre <span className="text-red-500">*</span>:
+              </label>
               <input
                 id="title"
                 type="text"
@@ -96,62 +136,91 @@ export default function CreateAPost() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="flex-1 border border-gray-300 rounded px-4 py-2"
+                required
+                maxLength={200}
               />
             </div>
 
-
             {/* Thème */}
             <div className="flex items-center gap-4">
-              <label htmlFor="themeId" className="w-32 text-right">Thème :</label>
+              <label htmlFor="themeId" className="w-32 text-right">
+                Thème <span className="text-red-500">*</span>:
+              </label>
               <select
                 id="themeId"
                 value={themeId}
                 onChange={(e) => setThemeId(e.target.value)}
                 className="flex-1 text-black h-12 block rounded-md border border-gray-300 shadow-sm focus:border-[#4682A9] focus:ring-[#4682A9]"
+                required
               >
-                
-                <option value="">Choisir</option>
-                <option value="1">Voiture</option>
-                <option value="2">Voyage</option>
+                <option value="">-- Choisir un thème --</option>
+                <option value="1">Culture</option>
+                <option value="2">Voiture</option>
                 <option value="3">Danse</option>
-                <option value="4">Culture</option>
+                <option value="4">Voyage</option>
               </select>
             </div>
 
-
             {/* Catégorie */}
-<div className="flex items-center gap-4">
-  <label htmlFor="category" className="w-32 text-right">Catégorie :</label>
-  <input
-    id="category"
-    type="text"
-    placeholder="Ex: Voyage, Actu, Cinéma, etc."
-    value={categoryName}
-    onChange={(e) => setCategoryName(e.target.value)}
-    className="flex-1 border border-gray-300 rounded px-4 py-2"
-  />
-</div>
-
-
+            <div className="flex items-center gap-4">
+              <label htmlFor="category" className="w-32 text-right">
+                Catégorie <span className="text-red-500">*</span>:
+              </label>
+              <input
+                id="category"
+                type="text"
+                placeholder="Ex: Lifestyle, Actu, Cinéma, etc."
+                value={categoryName}
+                onChange={(e) => setCategoryName(e.target.value)}
+                className="flex-1 border border-gray-300 rounded px-4 py-2"
+                required
+                maxLength={50}
+              />
+            </div>
 
             {/* Contenu */}
-            <div className="flex items-center gap-4">
-              <label htmlFor="body" className="w-32 text-right">Contenu :</label>
+            <div className="flex items-start gap-4">
+              <label htmlFor="body" className="w-32 text-right pt-2">
+                Contenu <span className="text-red-500">*</span>:
+              </label>
               <textarea
                 id="body"
                 placeholder="Contenu de l'article"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-                className="flex-1 border border-gray-300 rounded px-4 py-2 h-32"
+                className="flex-1 border border-gray-300 rounded px-4 py-2 h-32 resize-vertical"
+                required
+                minLength={10}
               />
             </div>
 
+            {/* Aperçu du slug */}
+            {title && (
+              <div className="flex items-center gap-4 text-sm text-gray-600">
+                <span className="w-32 text-right">Slug :</span>
+                <span className="flex-1 italic">{createSlug(title)}</span>
+              </div>
+            )}
+
             {/* Boutons */}
             <div className="flex justify-between">
-              <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                Publier
+              <button 
+                type="submit" 
+                disabled={isSubmitting}
+                className={`px-6 py-2 rounded text-white font-medium ${
+                  isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-blue-600 hover:bg-blue-700'
+                }`}
+              >
+                {isSubmitting ? "Publication..." : "Publier"}
               </button>
-              <button type="button" onClick={handleReset} className="text-blue-600 underline font-medium">
+              <button 
+                type="button" 
+                onClick={handleReset} 
+                disabled={isSubmitting}
+                className="text-blue-600 underline font-medium hover:text-blue-800 disabled:opacity-50"
+              >
                 Réinitialiser
               </button>
             </div>

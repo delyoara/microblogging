@@ -1,10 +1,8 @@
-// src/components/Header.tsx
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
-// Définir les types des props du Header
 interface HeaderProps {
   hideSignUpButton?: boolean; // Rendre la prop optionnelle
 }
@@ -42,7 +40,6 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           {/* Hamburger/X menu button for mobile (centered on mobile) */}
           <div className="md:hidden">
             <button
-            
               className="p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle navigation menu"
@@ -60,11 +57,11 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
             <Link href="/" className="hover:text-black">
               Home
             </Link>
-            <Link href="/bien-etre" className="hover:text-black">
-              Bien être
-            </Link>
             <Link href="/culture" className="hover:text-black">
               Culture
+            </Link>
+            <Link href="/dance" className="hover:text-black">
+              Dance
             </Link>
             <Link href="/voyage" className="hover:text-black">
               {" "}
@@ -105,18 +102,18 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
             Home
           </Link>
           <Link
-            href="/bien-etre"
-            className="text-gray-700 text-lg hover:text-black"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Bien être
-          </Link>
-          <Link
             href="/culture"
             className="text-gray-700 text-lg hover:text-black"
             onClick={() => setIsMenuOpen(false)}
           >
             Culture
+          </Link>
+          <Link
+            href="/dance"
+            className="text-gray-700 text-lg hover:text-black"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Dance
           </Link>
           <Link
             href="/voyage"
@@ -132,10 +129,6 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           >
             Voiture
           </Link>
-          {/* Add "/danse" link here if you have a "Danse" theme/page */}
-          {/* <Link href="/danse" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>
-            Danse
-          </Link> */}
         </div>
       </div>
     </nav>
