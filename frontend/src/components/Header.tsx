@@ -42,6 +42,7 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           {/* Hamburger/X menu button for mobile (centered on mobile) */}
           <div className="md:hidden">
             <button
+            
               className="p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle navigation menu"

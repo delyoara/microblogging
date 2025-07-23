@@ -30,10 +30,10 @@ interface TopNewsArticleProps {
 
 // Function to fetch articles specifically for the "Culture" theme
 async function getCultureArticles(): Promise<ArticleSummary[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts?theme=Culture`, {
-    // --- THIS IS THE CRUCIAL CHANGE ---
-    cache: 'no-store', // Disable caching for this specific fetch request
-    // or: next: { revalidate: 0 } // Another option to always revalidate
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+  console.log("Fetching culture articles from:", `${backendUrl}/api/posts?theme=Culture`);
+  const res = await fetch(`${backendUrl}/api/posts?theme=Culture`, {
+    cache: 'no-store',
   });
   if (!res.ok) {
     const errorBody = await res.text();
