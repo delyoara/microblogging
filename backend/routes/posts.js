@@ -68,7 +68,7 @@ const whereClause = theme ? { theme: { name: { equals: theme } } } : {};
 // GET /api/posts?theme=Culture
 router.get("/", async (req, res) => {
   const { theme } = req.query;
-
+console.log("ON REGARDE",theme)
   try {
     const whereClause = theme ? { theme: { name: { equals: theme } } } : {};
 
