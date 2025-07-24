@@ -1,20 +1,23 @@
 "use client";
 
-import React, { useState } from "react";
-import { FaUser, FaLock } from "react-icons/fa"; // You'll need to install react-icons
+import React from "react";
+import { FaUser, FaLock } from "react-icons/fa";
 
-const LoginForm: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+type Props = {
+  email: string;
+  password: string;
+  setEmail: (val: string) => void;
+  setPassword: (val: string) => void;
+  handleSubmit: (e: React.FormEvent) => void;
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle login logic here (e.g., API call)
-    console.log("Username:", username);
-    console.log("Password:", password);
-    alert("Login attempted!");
-  };
-
+const LoginForm: React.FC<Props> = ({
+  email,
+  password,
+  setEmail,
+  setPassword,
+  handleSubmit,
+}) => {
   return (
     <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full transform transition-all duration-300 hover:scale-105">
       <form onSubmit={handleSubmit}>
@@ -24,12 +27,13 @@ const LoginForm: React.FC = () => {
               <FaUser className="text-lg" />
             </span>
             <input
-              type="text"
+              type="email"
               placeholder="Email"
               className="w-full pl-10 pr-4 py-3 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none bg-white"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               aria-label="Email"
+              required
             />
           </div>
         </div>
@@ -39,12 +43,13 @@ const LoginForm: React.FC = () => {
               <FaLock className="text-lg" />
             </span>
             <input
-              type="Mot de passe"
+              type="password"
               placeholder="Mot de passe"
               className="w-full pl-10 pr-4 py-3 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none bg-white"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               aria-label="Mot de passe"
+              required
             />
           </div>
         </div>
@@ -58,7 +63,7 @@ const LoginForm: React.FC = () => {
       <div className="flex flex-col mt-6 text-center text-gray-600 text-sm">
         Pas encore inscrit.e?{" "}
         <a href="inscription" className="text-black hover:underline font-medium">
-          Creation d'un compte
+          Creation d`&apos;`un compte
         </a>
       </div>
     </div>
