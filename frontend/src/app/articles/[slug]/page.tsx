@@ -1,9 +1,12 @@
-// src/app/articles/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
+import rehypeRaw from "rehype-raw"; 
+import { Components } from "react-markdown";
+import { ComponentPropsWithoutRef } from "react";                                  
+import Image from "next/image";
+import Link from "next/link";
 
 interface ArticleDetail {
   slug: string;
@@ -15,19 +18,25 @@ interface ArticleDetail {
   authorName: string;
   content: string;
   theme: string;
-}
+}                                                                 
 
-const customComponents = {
-  // Paragraphes avec style classique
-  p: ({ children }: any) => (
-    <p className="text-lg text-gray-700 leading-relaxed mb-6">{children}</p>
+// Composants personnalisés pour le rendu Markdown
+const customComponents: Components = {
+
+   p: (props: ComponentPropsWithoutRef<"p">) => (
+    <p className="text-lg text-gray-700 leading-relaxed mb-6" {...props} />
   ),
 
-  // Titres de niveau 2 (h2)
-  h2: ({ children }: any) => (
-    <h2 className="text-2xl font-semibold text-gray-900 mt-10 mb-4">{children}</h2>
+// Titres de niveau 2 (h2)
+  h2: (props: ComponentPropsWithoutRef<"h2">) => (
+    <h2 className="text-2xl font-semibold text-gray-900 mt-10 mb-4" {...props} />
   ),
 };
+
+
+
+
+
 
 export async function generateStaticParams() {
   try {
@@ -123,7 +132,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
           {/* Image */}
           {article.imageUrl && (
             <div className="mb-12 **group**"> {/* Keep the 'group' class here */}
-              <img
+              <Image
                 src={article.imageUrl}
                 alt={article.altText}
                 className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 **grayscale transition-all duration-500 group-hover:grayscale-0**"
@@ -148,14 +157,14 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             <div className="w-full h-px "></div>
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-8">
               <p className="text-gray-600 italic">
-                Merci d'avoir lu cet article. N'hésitez pas à le partager !
+                Merci d`&apos;`avoir lu cet article. N`&apos;`hésitez pas à le partager !
               </p>
             </div>
           </div>
 
           {/* Navigation */}
           <div className="mt-16 pt-8 border-t border-gray-200">
-            <a
+            <Link
               href="/articles"
               className="inline-flex items-center text-black hover:text-blue-800 text-lg font-medium transition-colors duration-200 group"
             >
@@ -173,7 +182,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 />
               </svg>
               Retour aux articles
-            </a>
+            </Link>
           </div>
         </main>
         <Footer />

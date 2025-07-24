@@ -35,19 +35,7 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
         {/* This will be hidden on mobile, and the button will appear in the mobile menu */}
         <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
 
-   <Link
-            href="/create-a-post"
-            className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200"
-          >
-            create-a-post
-          </Link>
 
-          <Link
-            href="/signup"
-            className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200"
-          >
-            Sign Up
-          </Link>
         </div>
 
         {/* Ce bouton est masqué si hideSignUpButton est vrai */}
