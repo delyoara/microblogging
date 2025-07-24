@@ -2,11 +2,17 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ReactMarkdown from "react-markdown";
+<<<<<<< HEAD
 import rehypeRaw from "rehype-raw"; 
 import { Components } from "react-markdown";
 import { ComponentPropsWithoutRef } from "react";                                  
 import Image from "next/image";
 import Link from "next/link";
+=======
+import rehypeRaw from "rehype-raw";
+import { Components } from "react-markdown";
+import { ComponentPropsWithoutRef } from "react";
+>>>>>>> main
 
 interface ArticleDetail {
   slug: string;
@@ -22,6 +28,7 @@ interface ArticleDetail {
 
 // Composants personnalisés pour le rendu Markdown
 const customComponents: Components = {
+<<<<<<< HEAD
 
    p: (props: ComponentPropsWithoutRef<"p">) => (
     <p className="text-lg text-gray-700 leading-relaxed mb-6" {...props} />
@@ -30,6 +37,18 @@ const customComponents: Components = {
 // Titres de niveau 2 (h2)
   h2: (props: ComponentPropsWithoutRef<"h2">) => (
     <h2 className="text-2xl font-semibold text-gray-900 mt-10 mb-4" {...props} />
+=======
+  p: (props: ComponentPropsWithoutRef<"p">) => (
+    <p className="text-lg text-gray-700 leading-relaxed mb-6" {...props} />
+  ),
+
+  // Titres de niveau 2 (h2)
+  h2: (props: ComponentPropsWithoutRef<"h2">) => (
+    <h2
+      className="text-2xl font-semibold text-gray-900 mt-10 mb-4"
+      {...props}
+    />
+>>>>>>> main
   ),
 };
 
@@ -131,8 +150,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           {/* Image */}
           {article.imageUrl && (
+<<<<<<< HEAD
             <div className="mb-12 **group**"> {/* Keep the 'group' class here */}
               <Image
+=======
+            <div className="mb-12 **group**">
+              {" "}
+              {/* Keep the 'group' class here */}
+              <img
+>>>>>>> main
                 src={article.imageUrl}
                 alt={article.altText}
                 className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 **grayscale transition-all duration-500 group-hover:grayscale-0**"

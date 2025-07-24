@@ -35,7 +35,9 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
         {/* This will be hidden on mobile, and the button will appear in the mobile menu */}
         <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
 
+   
 
+        
         </div>
 
         {/* Ce bouton est masqué si hideSignUpButton est vrai */}
