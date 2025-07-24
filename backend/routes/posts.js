@@ -76,7 +76,7 @@ router.get("/top-posts", async (req, res) => {
 // GET /api/posts?theme=Culture
 router.get("/", async (req, res) => {
   const { theme } = req.query;
-
+console.log("ON REGARDE",theme)
   try {
     const whereClause = theme ? { theme: { name: { equals: theme } } } : {};
 
