@@ -13,12 +13,14 @@ export default function CreateAPost() {
   const [categoryName, setCategoryName] = useState("");
   const [themeId, setThemeId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageUrl, setImageUrl] = useState("")
 
   const handleReset = () => {
     setTitle("");
     setBody("");
     setCategoryName("");
     setThemeId("");
+    setImageUrl("");
   };
 
   // Fonction pour créer un slug valide
@@ -58,7 +60,7 @@ export default function CreateAPost() {
       categoryName: categoryName.trim(),
       title: title.trim(),
       description: body.trim().slice(0, 150),
-      imageUrl: "",
+      imageUrl: imageUrl.trim(),
       altText: createSlug(title),
       slug: createSlug(title),
       content: body.trim(),
@@ -109,8 +111,10 @@ export default function CreateAPost() {
     <>
       <Header />
       <section className="relative h-auto min-h-[450px]">
-        <div className="absolute inset-0 bg-[url('/images/bgform.jpg')] bg-no-repeat bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/50" />
+<div
+  className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+  style={{ backgroundImage: "url('https://res.cloudinary.com/dtbwsvacq/image/upload/v1753349509/create-2437747_1280_dlkoqs.webp')" }}
+/>        <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 min-h-[300px]">
           <h2 className="text-5xl font-bold">Postez un article</h2>
           <p className="mt-4 text-xl max-w-2xl text-justify">
@@ -178,6 +182,23 @@ export default function CreateAPost() {
               />
             </div>
 
+              {/* Images */}
+            <div className="flex items-center gap-4">
+              <label htmlFor="images" className="w-32 text-right">
+                Image URL <span className="text-red-500">*</span>:
+              </label>
+              <input
+                id="images"
+                type="text"
+                placeholder="Mettez l'URL de votre image (Image libre des droits!)"
+                value={imageUrl}
+                onChange={(e) => setCategoryName(e.target.value)}
+                className="flex-1 border border-gray-300 rounded px-4 py-2"
+                required
+                maxLength={50}
+              />
+            </div>
+
             {/* Contenu */}
             <div className="flex items-start gap-4">
               <label htmlFor="body" className="w-32 text-right pt-2">
@@ -194,14 +215,6 @@ export default function CreateAPost() {
               />
             </div>
 
-            {/* Aperçu du slug */}
-            {title && (
-              <div className="flex items-center gap-4 text-sm text-gray-600">
-                <span className="w-32 text-right">Slug :</span>
-                <span className="flex-1 italic">{createSlug(title)}</span>
-              </div>
-            )}
-
             {/* Boutons */}
             <div className="flex justify-between">
               <button 
@@ -210,7 +223,7 @@ export default function CreateAPost() {
                 className={`px-6 py-2 rounded text-white font-medium ${
                   isSubmitting 
                     ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-blue-600 hover:bg-blue-700'
+                    : 'bg-orange-500 hover:bg-orange-400'
                 }`}
               >
                 {isSubmitting ? "Publication..." : "Publier"}
@@ -219,7 +232,7 @@ export default function CreateAPost() {
                 type="button" 
                 onClick={handleReset} 
                 disabled={isSubmitting}
-                className="text-blue-600 underline font-medium hover:text-blue-800 disabled:opacity-50"
+                className="text-black font-medium hover:underline disabled:opacity-50"
               >
                 Réinitialiser
               </button>

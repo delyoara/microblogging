@@ -1,9 +1,10 @@
-// src/app/articles/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import { Components } from "react-markdown";
+import { ComponentPropsWithoutRef } from "react";
 
 interface ArticleDetail {
   slug: string;
@@ -17,15 +18,18 @@ interface ArticleDetail {
   theme: string;
 }
 
-const customComponents = {
-  // Paragraphes avec style classique
-  p: ({ children }: any) => (
-    <p className="text-lg text-gray-700 leading-relaxed mb-6">{children}</p>
+// Composants personnalisés pour le rendu Markdown
+const customComponents: Components = {
+  p: (props: ComponentPropsWithoutRef<"p">) => (
+    <p className="text-lg text-gray-700 leading-relaxed mb-6" {...props} />
   ),
 
   // Titres de niveau 2 (h2)
-  h2: ({ children }: any) => (
-    <h2 className="text-2xl font-semibold text-gray-900 mt-10 mb-4">{children}</h2>
+  h2: (props: ComponentPropsWithoutRef<"h2">) => (
+    <h2
+      className="text-2xl font-semibold text-gray-900 mt-10 mb-4"
+      {...props}
+    />
   ),
 };
 
@@ -122,7 +126,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
           {/* Image */}
           {article.imageUrl && (
-            <div className="mb-12 **group**"> {/* Keep the 'group' class here */}
+            <div className="mb-12 **group**">
+              {" "}
+              {/* Keep the 'group' class here */}
               <img
                 src={article.imageUrl}
                 alt={article.altText}
