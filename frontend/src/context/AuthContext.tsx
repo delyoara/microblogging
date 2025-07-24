@@ -1,11 +1,15 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { useRouter } from "next/navigation";
 
 type User = {
-  id: number;
+id: number;
   email: string;
-  name: string;
+  username: string;
+  prenom: string;
+  nom: string;
+  role: string;
 };
 
 type AuthContextType = {
@@ -20,6 +24,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const router = useRouter(); 
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -43,6 +48,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    router.push("/login"); 
   };
 
   return (
