@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const SignUpPage: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const SignUpPage: React.FC = () => {
         <div className="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Section de gauche - Image */}
           <div className="flex justify-center items-center">
-            <img
+            <Image
               className="rounded-lg object-cover w-full h-auto max-h-[500px]"
               src="https://res.cloudinary.com/dtbwsvacq/image/upload/v1753284893/journal_abqw1p.jpg" // Remplacez par l'URL de votre image désirée
               alt="journal"
@@ -132,7 +133,7 @@ const SignUpPage: React.FC = () => {
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-orange-500"
                 >
-                  S'inscrire
+                  S`&apos;`inscrire
                   <span className="absolute right-3 top-1/2 transform -translate-y-1/2">
                     &rarr;
                   </span>
