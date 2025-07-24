@@ -49,8 +49,6 @@ type View = 'info' | 'create-post' | 'my-posts';
 export default function User() {
   const [currentView, setCurrentView] = useState<View>('info');
   const [posts, setPosts] = useState<Post[]>(mockUserPosts);
-  const [newPostTitle, setNewPostTitle] = useState<string>('');
-  const [newPostContent, setNewPostContent] = useState<string>('');
   const [showLogoutModal, setShowLogoutModal] = useState<boolean>(false); // État pour le modal de déconnexion
 
   const [editingPostId, setEditingPostId] = useState<string | null>(null);
@@ -108,8 +106,8 @@ const confirmDeletePost = () => {
             onClick={() => setCurrentView('info')}
             className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
               currentView === 'info'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
+                ? 'bg-orange-300 text-black shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-black'
             }`}
           >
             Mes informations
@@ -118,8 +116,8 @@ const confirmDeletePost = () => {
             onClick={() => setCurrentView('create-post')}
             className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
               currentView === 'create-post'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
+                ? 'bg-orange-300 text-black shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-black'
             }`}
           >
             Créer un post
@@ -128,15 +126,15 @@ const confirmDeletePost = () => {
             onClick={() => setCurrentView('my-posts')}
             className={`px-4 py-2 rounded-lg transition-colors duration-200 ${
               currentView === 'my-posts'
-                ? 'bg-blue-600 text-white shadow-md'
-                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-blue-700'
+                ? 'bg-orange-300 text-black shadow-md'
+                : 'bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-black'
             }`}
           >
             Mes posts
           </button>
           <button
             onClick={() => setShowLogoutModal(true)}
-            className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors duration-200 shadow-md"
+            className="px-4 py-2 rounded-lg bg-black text-white hover:bg-orange-300 hover:text-black transition-colors duration-200 shadow-md"
           >
             Déconnexion
           </button>
@@ -190,13 +188,13 @@ const confirmDeletePost = () => {
                 <div className="flex justify-end space-x-2">
                   <button
                     onClick={handleCancelEdit}
-                    className="px-3 py-1 rounded bg-gray-300 text-gray-800 hover:bg-gray-400"
+                    className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
                   >
                     Annuler
                   </button>
                   <button
                     onClick={() => handleUpdatePost(post.id)}
-                    className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+                    className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
                   >
                     Valider
                   </button>
@@ -209,13 +207,13 @@ const confirmDeletePost = () => {
                 <div className="flex justify-end space-x-2">
                   <button
                     onClick={() => startEdit(post)}
-                    className="px-3 py-1 rounded bg-yellow-400 text-white hover:bg-yellow-500"
+                    className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
                   >
                     Modifier
                   </button>
                   <button
                     onClick={() => setPostToDelete(post.id)}
-                    className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600"
+                    className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
                   >
                     Supprimer
                   </button>
@@ -247,7 +245,7 @@ const confirmDeletePost = () => {
         </button>
         <button
           onClick={confirmDeletePost}
-          className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600"
+          className="px-4 py-2 rounded-lg  bg-black text-white hover:bg-orange-300 hover:text-black"
         >
           Supprimer
         </button>
@@ -272,7 +270,7 @@ const confirmDeletePost = () => {
               </button>
               <button
                 onClick={handleLogout}
-                className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors duration-200"
+                className="px-4 py-2 rounded-lg  bg-black text-white hover:bg-orange-300 hover:text-black transition-colors duration-200"
               >
                 Déconnexion
               </button>
