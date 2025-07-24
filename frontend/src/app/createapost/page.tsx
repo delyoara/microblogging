@@ -192,7 +192,7 @@ export default function CreateAPost() {
                 type="text"
                 placeholder="Mettez l'URL de votre image (Image libre des droits!)"
                 value={imageUrl}
-                onChange={(e) => setCategoryName(e.target.value)}
+                onChange={(e) => setImageUrl(e.target.value)}
                 className="flex-1 border border-gray-300 rounded px-4 py-2"
                 required
                 maxLength={50}

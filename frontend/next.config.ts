@@ -1,12 +1,9 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
+    domains: [
+      "res.cloudinary.com",
+      "via.placeholder.com", // ✅ Ajoute ce domaine
     ],
   },
 };

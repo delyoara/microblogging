@@ -20,8 +20,8 @@ const TopNewsArticle: React.FC<TopNewsArticleProps> = ({
     <Link href={`/articles/${title.toLowerCase().replace(/\s+/g, '-')}`} className="flex items-start space-x-4 group">
       <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
        <Image
-  src={imageUrl}
-  alt={altText}
+ src={imageUrl || "https://via.placeholder.com/800x400?text=Image+indisponible"}
+  alt={altText || "Image de remplacement"}
   fill
   sizes="96px"
   style={{ objectFit: 'cover' }}

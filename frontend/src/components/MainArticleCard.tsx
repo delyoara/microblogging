@@ -27,14 +27,14 @@ const MainArticleCard: React.FC<MainArticleCardProps> = ({
     <article className="bg-white rounded-lg overflow-hidden flex flex-col">
       {/* Image */}
       <div className="relative w-full h-80 lg:h-96">
-        <Image
-          src={imageUrl}
-          alt={altText}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
-          style={{ objectFit: 'cover' }}
-                className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500"
-        />
+     <Image
+  src={imageUrl || "https://via.placeholder.com/800x400?text=Image+indisponible"}
+  alt={altText || "Image de remplacement"}
+  fill
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 50vw"
+  style={{ objectFit: 'cover' }}
+  className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 grayscale hover:grayscale-0 transition-all duration-500"
+/>
       </div>
 
 
