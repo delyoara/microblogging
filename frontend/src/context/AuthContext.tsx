@@ -1,10 +1,17 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { useRouter } from "next/navigation";
 
+// --- Types ---
 type User = {
-id: number;
+  id: number;
   email: string;
   username: string;
   prenom: string;
@@ -16,39 +23,73 @@ type AuthContextType = {
   user: User | null;
   token: string | null;
   login: (token: string, user: User) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
 };
 
+// --- Stockage du token en mémoire (hors React) ---
+let _accessToken: string | null = null;
+
+export function getAccessToken() {
+  return _accessToken;
+}
+
+export function setAccessToken(token: string | null) {
+  _accessToken = token;
+}
+
+// --- Contexte React ---
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const router = useRouter(); 
+  const router = useRouter();
 
+  // 🟢 Quand le composant est monté, essayer de rafraîchir le token
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    const storedUser = localStorage.getItem("user");
+    const refresh = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/api/auth/refresh-token", {
+          method: "POST",
+          credentials: "include",
+        });
 
-    if (storedToken && storedUser) {
-      setToken(storedToken);
-      setUser(JSON.parse(storedUser));
-    }
+        if (res.ok) {
+          const data = await res.json();
+          setToken(data.accessToken);
+          setAccessToken(data.accessToken); // 🔑 met à jour la variable globale
+          setUser(data.user);
+        }
+      } catch (err) {
+        console.error("Erreur lors du refresh token :", err);
+        setToken(null);
+        setAccessToken(null);
+        setUser(null);
+      }
+    };
+
+    refresh();
   }, []);
 
-  const login = (token: string, user: User) => {
-    setToken(token);
+  const login = (newToken: string, user: User) => {
+    setToken(newToken);
+    setAccessToken(newToken); // 🔑 met à jour la variable globale
     setUser(user);
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await fetch("http://localhost:3001/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (err) {
+      console.error("Erreur logout :", err);
+    }
     setToken(null);
+    setAccessToken(null); // 🔑 nettoyage
     setUser(null);
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    router.push("/login"); 
+    router.push("/login");
   };
 
   return (

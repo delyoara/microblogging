@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -6,6 +6,7 @@ import { useAuth } from "@/context/AuthContext";
 import LoginForm from "@/components/LoginForm";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -22,15 +23,16 @@ const LoginPage: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ email, password }),
       });
 
       const raw = await res.text();
       console.log("🧾 Réponse brute du serveur :", raw);
-      let data;
 
+      let data;
       try {
-        data = JSON.parse(raw); 
+        data = JSON.parse(raw);
       } catch (err) {
         throw new Error("Le serveur a renvoyé une réponse invalide.");
       }
@@ -39,9 +41,8 @@ const LoginPage: React.FC = () => {
         throw new Error(data.error || "Échec de la connexion");
       }
 
-      // ✅ Connexion réussie
-      login(data.token, data.user);
-      router.push("/user"); 
+      login(data.accessToken, data.user);
+      router.push("/user");
     } catch (err: any) {
       alert(err.message || "Erreur inattendue");
     }
@@ -66,6 +67,13 @@ const LoginPage: React.FC = () => {
             setPassword={setPassword}
             handleSubmit={handleSubmit}
           />
+
+          {/* 👉 Ajout du lien "Mot de passe oublié" */}
+          <div className="mt-4 text-center">
+            <Link href="/forgot-password" className="text-sm text-orange-500 hover:underline">
+              Mot de passe oublié ?
+            </Link>
+          </div>
         </div>
       </main>
 
