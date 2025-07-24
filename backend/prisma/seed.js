@@ -226,7 +226,331 @@ Forums, garages partagés, amis bricoleurs : écoutez, observez, mais ne vous co
 ## 5. Bricolez comme un·e gamin·e
 Soyez curieux·se, touchez, démontez (et remontez !). Faites-le pour comprendre, pour le plaisir, pas pour cocher une case de “réparateur parfait”.
 `,
-  }
+  },
+  //Articles de la rubrique VOYAGE :
+  {
+  imageUrl: "/hanoi-street-food.jpg",
+  altText: "Une vendeuse de pho dans une ruelle de Hanoï",
+  categoryName: "Gastronomie autour du monde",
+  title: "Découvrir Hanoï par sa cuisine de rue",
+  description: "Goûter Hanoï, c’est déambuler entre les marmites fumantes, les bouillons parfumés et les sourires complices des marchandes de rue.",
+  authorName: "Emma Ruiz",
+  theme: "Voyage",
+  content: `
+Impossible d’évoquer le Vietnam sans parler de sa cuisine. À Hanoï, la rue est un théâtre culinaire où se joue chaque jour une symphonie de saveurs.
+
+## Une immersion olfactive et sensorielle
+Du matin au soir, la ville crépite : brochettes de porc grillées, soupe *pho*, *banh mi* croustillants... Chaque trottoir devient une scène où les ustensiles tintent et les odeurs dansent.
+
+## Manger assis sur un tabouret en plastique
+Ici, pas de formalités : on mange sur le pouce, accroupi, aux côtés d’inconnus. Mais tout le monde partage la même quête : celle de la bouchée parfaite, généreuse et sincère.
+
+## Une mémoire vivante
+La cuisine de rue est une tradition, mais aussi un acte de résistance. Derrière chaque plat se cache une histoire, souvent transmise de mère en fille. Goûter, c’est aussi écouter.
+`,
+},
+{
+  imageUrl: "/resto-local.jpg",
+  altText: "Un petit resto local avec une cuisine ouverte",
+  categoryName: "Gastronomie autour du monde",
+  title: "Comment éviter les restos à touristes et manger local",
+  description: "Manger local, ce n’est pas qu’une question de budget, c’est un choix éthique, culturel… et souvent délicieux.",
+  authorName: "Camille Bernard",
+  theme: "Voyage",
+  content: `
+On le sait : les restaurants à touristes proposent souvent une version édulcorée (et chère) de la cuisine locale. Voici comment les éviter.
+
+## Mes 3 repères
+1. **Pas de menu traduit en 5 langues**.
+2. **Les locaux y mangent** (et pas seulement sur Instagram).
+3. **On y sent les odeurs de cuisson dès l’entrée.**
+
+## Le pouvoir de la curiosité
+Demandez aux habitants : un vendeur de rue, votre hôte, un taxi. C’est souvent comme ça que j’ai fait mes meilleures découvertes.
+
+## Une démarche responsable
+En mangeant local, on soutient l’économie du pays et on découvre sa vraie culture. Ce n’est pas juste un repas, c’est un échange.
+`,
+},
+{
+  imageUrl: "/arepas.jpg",
+  altText: "Arepas dorées, tasse de café fumant et paysage montagneux colombien",
+  categoryName: "Gastronomie autour du monde",
+  title: "Saveurs de Colombie : entre arepas, café et convivialité",
+  description: "Un voyage gustatif au cœur de la Colombie, entre spécialités locales, marchés animés et traditions chaleureuses.",
+  authorName: "Julien Moreau",
+  theme: "Voyage",
+  content: `
+Mon voyage en Colombie a été une explosion de saveurs. Chaque région a sa spécialité, mais partout, j’ai retrouvé un point commun : la générosité.
+
+## Les arepas, en version mille fois revisitée
+Ces galettes de maïs sont partout. Farcies au fromage, à la viande ou même sucrées… J’en ai goûté une différente chaque jour !
+
+## Le café, une fierté nationale
+Rien à voir avec ce que je buvais en France. Ici, le café est doux, fruité, presque sucré naturellement. Visiter une finca (plantation) dans la région du Quindío m’a appris tout le processus, du grain à la tasse.
+
+## Des repas comme des fêtes
+Chaque repas était une invitation à partager. J’ai été accueillie comme une amie, avec du *sancocho* (soupe) mijotée pendant des heures, ou des empanadas croustillantes.
+
+La gastronomie colombienne, c’est une expérience de cœur autant que de palais.
+`,
+},
+{
+  imageUrl: "/petit-dejeuner.jpg",
+  altText: "Un collage de petits-déjeuners typiques (croissant, soupe pho, huevos rancheros...)",
+  categoryName: "Gastronomie autour du monde",
+  title: "Tour du monde des petits-déjeuners",
+  description: "Du salé au sucré, du copieux au léger : chaque pays a sa manière de commencer la journée. Petit voyage matinal.",
+  authorName: "Chloé Lemoine",
+  theme: "Voyage",
+  content: `
+Le petit-déjeuner est souvent considéré comme le repas le plus important de la journée. Il est surtout l’un des plus révélateurs d’une culture.
+
+## Vietnam : la soupe *pho*
+Oui, on commence la journée avec un bol fumant de soupe ! Riche, parfumée, garnie de bœuf, d’herbes fraîches et de nouilles.
+
+## Mexique : *huevos rancheros*
+Des œufs sur une tortilla, nappés de sauce tomate, accompagnés de haricots. Énergique et relevé : idéal avant une journée d’exploration.
+
+## France : croissant, pain-beurre et café noir
+Simple, mais efficace. Et toujours accompagné d’un sourire en terrasse (quand il fait beau…).
+
+## Le petit-déjeuner dit tout
+En le partageant avec les locaux, on comprend leur rythme, leurs envies, leur quotidien. C’est une porte d’entrée délicieuse.
+`,
+},
+{
+  imageUrl: "/dolomites.jpg",
+  altText: "Paysage montagneux des Dolomites au lever du soleil",
+  categoryName: "Récits personnels & Aventures",
+  title: "À pied dans les Dolomites : solitude et émerveillement",
+  description: "Un trek de 6 jours au cœur des montagnes italiennes. Entre silence, orages et beauté brute.",
+  authorName: "Julien Moreau",
+  theme: "Voyage",
+  content: `
+Partir seul dans les Dolomites, c’était un pari. Sans itinéraire figé, juste un sac léger, une tente et une carte.
+
+## 🌄 Des levers de soleil à couper le souffle
+Le matin, les sommets prenaient feu. Le rose des montagnes contrastait avec le vert des alpages. J’ai pleuré un matin, sans trop savoir pourquoi. 
+
+## ⛈️ L'orage, la peur, l’adrénaline
+Un soir, l’orage m’a surpris près du lac Sorapis. J’ai couru, trempé, transi, et terriblement vivant.
+
+## 🙌 Se retrouver
+Il ne s’est rien passé d’exceptionnel. Et pourtant, tout a changé. Je suis revenu plus ancré, plus simple. Les Dolomites m’ont appris le silence.
+`,
+},
+{
+  imageUrl: "/van.jpg",
+  altText: "Un van garé face à l’océan au Portugal, coucher de soleil",
+  categoryName: "Récits personnels & Aventures",
+  title: "En van à travers le Portugal : un été de liberté",
+  description: "Des vagues de Nazaré aux ruelles d’Alfama, journal d’un road trip en van rempli d’imprévus et de rencontres.",
+  authorName: "Camille Bernard",
+  theme: "Voyage",
+  content: `
+Cet été-là, j’ai quitté Paris avec mon vieux van Volkswagen et zéro plan. Cap au sud.
+
+## 🏄‍♀️ Nazaré et les géants
+J’ai dormi trois nuits au bord de la falaise. Le vent tapait, les surfeurs volaient presque. Un pêcheur m’a appris à faire griller des sardines.
+
+## 🛣️ Perdu·e, mais jamais vraiment seul·e
+Un pneu éclaté en Alentejo, une vieille dame m’a offert un café et son téléphone. Elle s’appelait Dona Amélia. Ce genre de geste qui reste.
+
+## 🎶 Lisbonne et ses fados
+J’ai fini le périple dans les ruelles de l’Alfama. Les chants montaient des bars minuscules. On pleurait tous sans trop savoir pourquoi.
+
+Ce n’était pas juste un voyage. C’était un chapitre.
+`,
+},
+{
+  imageUrl: "/voyage-seule.jpg",
+  altText: "Dans une gare, Emma de dos avec un sac et une valise",
+  categoryName: "Récits personnels & Aventures",
+  title: "Mon premier voyage en solo : 3 semaines au Japon",
+  description: "Entre Tokyo et Kyoto, ce voyage a été bien plus qu’un simple itinéraire. C’était une rencontre avec moi-même.",
+  authorName: "Emma Ruiz",
+  theme: "Voyage",
+  content: `
+J'avais peur. Mais j’ai pris ce billet seule, un soir de doute. Trois semaines plus tard, je regardais Tokyo depuis Shibuya Crossing.
+
+## 🗼 Tokyo : le chaos organisé
+Métro, néons, ramen à minuit. Tout était rapide, mais étrangement rassurant. J’étais anonyme, et c’était doux.
+
+## 🎌 Kyoto : silence et temples
+Les jardins, les geishas furtives, les torii rouges de Fushimi Inari. Je passais des heures à marcher sans but. 
+
+## 🙋‍♀️ Apprendre à être seule
+Manger seule au resto, se perdre, demander en anglais bancal. Tout ça m’a fait grandir. J’étais vulnérable, mais forte.
+
+Je n’étais pas juste en voyage. J’étais en train de devenir quelqu’un.
+`,
+},
+{
+    imageUrl: "/roadtrip-canada.jpg",
+    altText: "Road trip au Canada",
+    categoryName: "Récits personnels & Aventures",
+    title: "10 jours à travers les Rocheuses canadiennes",
+    description: "Un itinéraire inoubliable entre lacs turquoise, forêts denses et montagnes majestueuses.",
+    authorName: "Hugo Martin",
+    theme: "Voyage",
+    content: `
+## 🏔️ Des paysages à couper le souffle
+Partez de Calgary et traversez Banff, Jasper et Yoho. Chaque parc national offre ses trésors naturels : lacs glaciaires, cascades, randonnées inoubliables.
+
+## 🚗 Conseils pratiques
+- Louer un van aménagé
+- Prévoir des réservations pour les campings
+- Respecter la faune sauvage (ours, élans…)
+
+Un road trip idéal pour les amoureux de nature et de liberté.
+`,
+  },
+  {
+  imageUrl: "/sac-a-dos-minimaliste.jpg",
+  altText: "Un sac à dos minimaliste parfaitement organisé",
+  categoryName: "Conseils pratiques",
+  title: "Comment préparer un sac à dos minimaliste pour un mois",
+  description: "Les essentiels pour voyager léger et éviter les galères de surpoids.",
+  authorName: "Claire Dumont",
+  theme: "Voyage",
+  content: `
+## L’art de voyager léger
+Quand on part en sac à dos pour plusieurs semaines, chaque gramme compte. Après plusieurs essais (et quelques lumbagos), j’ai enfin trouvé l’équilibre entre confort, praticité et légèreté.
+
+### Ce que j’emporte toujours
+- 3 t-shirts techniques, 2 pantalons convertibles
+- Une serviette microfibre
+- Un sac pliable pour les sorties
+- Une trousse de secours réduite à l’essentiel
+
+### Mes 3 règles d’or
+1. Chaque objet doit avoir **au moins deux usages**.
+2. Je roule les vêtements au lieu de les plier.
+3. J’emporte uniquement ce que je porte en 7 jours maximum.
+
+Un sac bien organisé, c’est moins de stress, plus de mobilité et... plus de place pour les souvenirs !
+  `
+},
+{
+  imageUrl: "/app-voyage.jpg",
+  altText: "Applications de voyage ouvertes sur un téléphone",
+  categoryName: "Conseils pratiques",
+  title: "10 applis indispensables en voyage",
+  description: "Mon kit numérique pour ne jamais être perdu, fauché ou mal logé.",
+  authorName: "Pola Dupont",
+  theme: "Voyage",
+  content: `
+## Mon top 10 après 6 mois de voyage
+Voici les applications que j’utilise (presque) tous les jours quand je suis à l’étranger :
+
+1. **Maps.me** – pour les cartes hors ligne
+2. **XE Currency** – convertisseur de devises
+3. **Booking** et **Hostelworld** – trouver un lit rapidement
+4. **Rome2Rio** – planifier les trajets multimodaux
+5. **Google Translate** – avec traduction par image
+6. **Polarsteps** – pour garder une trace de mes voyages
+7. **Splitwise** – partager les dépenses facilement
+8. **Trail Wallet** – gestion du budget
+9. **Flightradar24** – suivre son avion en temps réel
+10. **HappyCow** – trouver des restos végé où que je sois
+
+Un bon téléphone, une batterie externe, et je suis prêt à partir !
+  `
+},
+{
+  imageUrl: "/budget-voyage.jpg",
+  altText: "Carnet de voyage avec calculatrice et devises étrangères",
+  categoryName: "Conseils pratiques",
+  title: "Gérer son budget en voyage : mes astuces testées",
+  description: "Comment voyager plusieurs mois sans exploser ses finances.",
+  authorName: "Sofia Herrera",
+  theme: "Voyage",
+  content: `
+## Voyager sans se ruiner, c’est possible
+En 8 mois autour de l’Asie et de l’Amérique du Sud, j’ai appris à **optimiser chaque dépense** sans sacrifier l’expérience.
+
+### Mes astuces concrètes :
+- **Changer son argent dans les banques locales**, pas à l’aéroport
+- Manger dans les marchés ou petits bouis-bouis, c’est **moins cher et plus authentique**
+- Toujours négocier poliment les prix en Asie
+- Voyager lentement : **moins de transport = plus d’économies**
+
+### Outils utilisés :
+- Un tableau Google Sheets partagé avec moi-même
+- Une carte bancaire sans frais à l’étranger
+- Des alertes de prix pour les vols
+
+J’ai gardé mes dépenses à 25€/jour en moyenne. Comme quoi, le rêve est souvent plus accessible qu’on ne le pense !
+  `
+},
+{
+  imageUrl: "/marche-local.jpg",
+  altText: "Touriste discutant avec un artisan local dans un marché",
+  categoryName: "Voyage éthique",
+  title: "Voyager éthique : comment respecter les populations locales",
+  description: "Être un voyageur responsable, ce n’est pas si compliqué.",
+  authorName: "Mariana Ríos",
+  theme: "Voyage",
+  content: `
+## Voyager sans déranger
+J’ai souvent vu des touristes prendre des photos sans demander, mal s’habiller dans des lieux sacrés, ou encore négocier jusqu’à l’absurde. Ça m’a fait réfléchir.
+
+### Mes règles simples :
+- Toujours **se renseigner sur la culture locale** avant d’arriver
+- Acheter auprès d’artisans et de producteurs locaux
+- Demander la permission avant de prendre quelqu’un en photo
+- Choisir des hébergements tenus par des habitants
+
+### Une question d'attitude
+Voyager, c’est un échange. **Le respect commence par la curiosité et l’humilité.** En changeant quelques habitudes, on fait une vraie différence.
+  `
+},
+{
+  imageUrl: "/dechets-plage.jpg",
+  altText: "Voyageuse ramassant des déchets sur une plage",
+  categoryName: "Voyage étique",
+  title: "Mes astuces pour limiter mon impact écologique en voyage",
+  description: "Réduire son empreinte tout en continuant à découvrir le monde.",
+  authorName: "Amira Ben Salah",
+  theme: "Voyage",
+  content: `
+## Voyager et écologie : mission impossible ?
+Pas forcément. En adaptant quelques comportements, j’ai pu **réduire drastiquement mon empreinte carbone** tout en profitant pleinement de mes voyages.
+
+### Mes habitudes :
+- Je privilégie le train ou le bus au lieu de l’avion
+- J’emporte une **gourde filtrante** et des sacs réutilisables
+- Je mange local et végétarien dès que possible
+- Je participe à des actions de nettoyage avec des ONG
+
+### Bonus :
+Je compense mes trajets les plus polluants via des programmes de reforestation. Ce n’est pas parfait, mais c’est un début. **Chaque geste compte !**
+  `
+},
+{
+  imageUrl: "/ferme-bio_sri_lanka.jpg",
+  altText: "Touriste aidant dans une ferme biologique au Sri Lanka",
+  categoryName: "Voyage éthique",
+  title: "Voyager autrement : mes choix pour un tourisme plus responsable",
+  description: "Moins de luxe, plus de lien humain et de conscience environnementale.",
+  authorName: "Claire Dumont",
+  theme: "Voyage",
+  content: `
+## Repenser notre manière de découvrir le monde
+Je me suis longtemps posé la question : peut-on vraiment voyager sans nuire à l’environnement ou aux habitants ? J’ai trouvé quelques pistes concrètes.
+
+### Mes engagements :
+- J’évite les hôtels de chaîne au profit d’**écolodges** ou de logements chez l’habitant
+- Je refuse toute activité impliquant l’exploitation animale
+- Je participe à des projets de **volontariat local** (fermes bio, écoles…)
+
+### Et au quotidien ?
+Je consomme moins, je choisis des transports bas carbone, et je prends le temps de **comprendre les enjeux locaux** avant d’agir.
+
+🌍 Voyager éthique, ce n’est pas une contrainte : c’est une autre façon d’aimer le monde.
+  `
+}
 ];
 
 async function main() {
