@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export default function CreateAPost() {
   const router = useRouter();
@@ -13,7 +11,7 @@ export default function CreateAPost() {
   const [categoryName, setCategoryName] = useState("");
   const [themeId, setThemeId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleReset = () => {
     setTitle("");
@@ -28,23 +26,23 @@ export default function CreateAPost() {
     return title
       .toLowerCase()
       .trim()
-      .replace(/[àáâãäå]/g, 'a')
-      .replace(/[èéêë]/g, 'e')
-      .replace(/[ìíîï]/g, 'i')
-      .replace(/[òóôõö]/g, 'o')
-      .replace(/[ùúûü]/g, 'u')
-      .replace(/[ç]/g, 'c')
-      .replace(/[^a-z0-9\s-]/g, '') // Supprimer les caractères spéciaux
-      .replace(/\s+/g, '-') // Remplacer les espaces par des tirets
-      .replace(/-+/g, '-') // Supprimer les tirets multiples
-      .replace(/^-|-$/g, ''); // Supprimer les tirets en début/fin
+      .replace(/[àáâãäå]/g, "a")
+      .replace(/[èéêë]/g, "e")
+      .replace(/[ìíîï]/g, "i")
+      .replace(/[òóôõö]/g, "o")
+      .replace(/[ùúûü]/g, "u")
+      .replace(/[ç]/g, "c")
+      .replace(/[^a-z0-9\s-]/g, "") // Supprimer les caractères spéciaux
+      .replace(/\s+/g, "-") // Remplacer les espaces par des tirets
+      .replace(/-+/g, "-") // Supprimer les tirets multiples
+      .replace(/^-|-$/g, ""); // Supprimer les tirets en début/fin
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (isSubmitting) return; // Empêcher la double soumission
-    
+
     setIsSubmitting(true);
 
     // Validation côté client
@@ -71,8 +69,8 @@ export default function CreateAPost() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts`, {
         method: "POST",
-        headers: { 
-          "Content-Type": "application/json"
+        headers: {
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -93,9 +91,10 @@ export default function CreateAPost() {
         router.push("/confirmationform");
       } else {
         // Afficher l'erreur spécifique du serveur
-        const errorMessage = typeof data === 'object' && data.error 
-          ? data.error 
-          : "Erreur lors de la création de l'article";
+        const errorMessage =
+          typeof data === "object" && data.error
+            ? data.error
+            : "Erreur lors de la création de l'article";
         alert(errorMessage);
         console.error("Erreur HTTP :", res.status, data);
       }
@@ -109,29 +108,29 @@ export default function CreateAPost() {
 
   return (
     <>
-      <Header />
-      <section className="relative h-auto min-h-[450px]">
-<div
-  className="absolute inset-0 bg-no-repeat bg-cover bg-center"
-  style={{ backgroundImage: "url('https://res.cloudinary.com/dtbwsvacq/image/upload/v1753349509/create-2437747_1280_dlkoqs.webp')" }}
-/>        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 min-h-[300px]">
-          <h2 className="text-5xl font-bold">Postez un article</h2>
+      <section className="relative h-auto min-h-[200px]">
+        <div className="absolute inset-0 bg-black" />
+        <div className="relative z-10 flex flex-col items-center justify-center text-center text-white px-6 min-h-[80px]">
+          <h2 className="text-5xl mt-6 font-bold">Postez un article</h2>
           <p className="mt-4 text-xl max-w-2xl text-justify">
             Choisissez un thème, une catégorie, créez un sujet et publiez un article.
           </p>
         </div>
       </section>
 
-      <section className="bg-gray-100 py-16 px-4">
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-4xl shadow relative z-20 -mt-20">
-          <h2 className="text-3xl font-semibold mb-6 text-center">POST</h2>
-          <form onSubmit={handleSubmit} className="space-y-6">
-
+      <section className="py-8 px-4">
+        <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow relative z-20 -mt-20 animate-fade-in">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">
+            Créer un nouveau post
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Titre */}
-            <div className="flex items-center gap-4">
-              <label htmlFor="title" className="w-32 text-right">
-                Titre <span className="text-red-500">*</span>:
+            <div>
+              <label
+                htmlFor="title"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Titre du post: <span className="text-red-500">*</span>
               </label>
               <input
                 id="title"
@@ -139,22 +138,25 @@ export default function CreateAPost() {
                 placeholder="Définissez un titre"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="flex-1 border border-gray-300 rounded px-4 py-2"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"
                 required
                 maxLength={200}
               />
             </div>
 
             {/* Thème */}
-            <div className="flex items-center gap-4">
-              <label htmlFor="themeId" className="w-32 text-right">
-                Thème <span className="text-red-500">*</span>:
+            <div>
+              <label
+                htmlFor="themeId"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Thème: <span className="text-red-500">*</span>
               </label>
               <select
                 id="themeId"
                 value={themeId}
                 onChange={(e) => setThemeId(e.target.value)}
-                className="flex-1 text-black h-12 block rounded-md border border-gray-300 shadow-sm focus:border-[#4682A9] focus:ring-[#4682A9]"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"
                 required
               >
                 <option value="">-- Choisir un thème --</option>
@@ -166,9 +168,12 @@ export default function CreateAPost() {
             </div>
 
             {/* Catégorie */}
-            <div className="flex items-center gap-4">
-              <label htmlFor="category" className="w-32 text-right">
-                Catégorie <span className="text-red-500">*</span>:
+            <div>
+              <label
+                htmlFor="category"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Catégorie: <span className="text-red-500">*</span>
               </label>
               <input
                 id="category"
@@ -176,63 +181,67 @@ export default function CreateAPost() {
                 placeholder="Ex: Lifestyle, Actu, Cinéma, etc."
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
-                className="flex-1 border border-gray-300 rounded px-4 py-2"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"
                 required
                 maxLength={50}
               />
             </div>
 
-              {/* Images */}
-            <div className="flex items-center gap-4">
-              <label htmlFor="images" className="w-32 text-right">
-                Image URL <span className="text-red-500">*</span>:
+            {/* Image URL */}
+            <div>
+              <label
+                htmlFor="imageUrl"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Image URL: <span className="text-red-500">*</span>
               </label>
               <input
-                id="images"
+                id="imageUrl"
                 type="text"
-                placeholder="Mettez l'URL de votre image (Image libre des droits!)"
+                placeholder="Mettez l'URL de votre image (Image libre de droits!)"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                className="flex-1 border border-gray-300 rounded px-4 py-2"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500"
                 required
-                maxLength={50}
               />
             </div>
 
             {/* Contenu */}
-            <div className="flex items-start gap-4">
-              <label htmlFor="body" className="w-32 text-right pt-2">
-                Contenu <span className="text-red-500">*</span>:
+            <div>
+              <label
+                htmlFor="body"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Contenu du post: <span className="text-red-500">*</span>
               </label>
               <textarea
                 id="body"
+                rows={6}
                 placeholder="Contenu de l'article"
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
-                className="flex-1 border border-gray-300 rounded px-4 py-2 h-32 resize-vertical"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-500 resize-y"
                 required
                 minLength={10}
-              />
+              ></textarea>
             </div>
 
             {/* Boutons */}
-            <div className="flex justify-between">
-              <button 
-                type="submit" 
+            <div className="flex justify-between items-center">
+              <button
+                type="submit"
                 disabled={isSubmitting}
-                className={`px-6 py-2 rounded text-white font-medium ${
-                  isSubmitting 
-                    ? 'bg-gray-400 cursor-not-allowed' 
-                    : 'bg-orange-500 hover:bg-orange-400'
+                className={`bg-orange-500 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-200 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                {isSubmitting ? "Publication..." : "Publier"}
+                {isSubmitting ? "Publication..." : "Publier le post"}
               </button>
-              <button 
-                type="button" 
-                onClick={handleReset} 
+              <button
+                type="button"
+                onClick={handleReset}
                 disabled={isSubmitting}
-                className="text-black font-medium hover:underline disabled:opacity-50"
+                className="text-black hover:underline  font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors duration-200"
               >
                 Réinitialiser
               </button>
@@ -240,7 +249,6 @@ export default function CreateAPost() {
           </form>
         </div>
       </section>
-      <Footer />
     </>
   );
 }
