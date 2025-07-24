@@ -1,4 +1,5 @@
-// src/components/Footer.tsx
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { FaInstagram, FaYoutube, FaTwitter } from "react-icons/fa"; // Assuming you have react-icons installed
