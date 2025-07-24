@@ -24,7 +24,7 @@ const themes: Theme[] = [
     name: "Dance",
     description: "Équilibre, rituels & conscience.",
     bgColor: "#f9fafb",
-    image: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753348220/pole-dance-1287822_1280_cotybp.jpg",
+    image: "https://via.placeholder.com/300x200?text=Image+non+disponible",
   },
   {
     name: "Automobile",
