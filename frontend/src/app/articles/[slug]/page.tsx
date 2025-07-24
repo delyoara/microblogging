@@ -7,7 +7,7 @@ import { Components } from "react-markdown";
 import { ComponentPropsWithoutRef } from "react";                                  
 import Image from "next/image";
 import Link from "next/link";
-
+ type ArticlePageParams = { slug: string };
 interface ArticleDetail {
   slug: string;
   imageUrl: string;
@@ -57,7 +57,9 @@ interface ArticlePageProps {
   params: { slug?: string };
 }
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
+export default async function ArticlePage(context: { params: ArticlePageParams }) {
+  const { params } = context;
+  type ArticlePageParams = { slug: string };
   if (!params?.slug) {
     return notFound();
   }
@@ -135,6 +137,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
               <Image
                 src={article.imageUrl}
                 alt={article.altText}
+                width={1200}
+                height={600}
                 className="w-full max-h-[600px] object-cover rounded-2xl shadow-2xl border border-gray-100 **grayscale transition-all duration-500 group-hover:grayscale-0**"
               />
             </div>

@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Image from "next/image";
 
 interface Theme {
   name: string;
@@ -25,7 +24,7 @@ const themes: Theme[] = [
     name: "Dance",
     description: "Équilibre, rituels & conscience.",
     bgColor: "#f9fafb",
-    image: "https://via.placeholder.com/300x200?text=Image+non+disponible",
+    image: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753348220/pole-dance-1287822_1280_cotybp.jpg",
   },
   {
     name: "Automobile",
@@ -56,7 +55,7 @@ const ThemeSection: React.FC = () => {
 
             {/* photo */}
             <div className="flex-grow flex items-center justify-center mb-4">
-              <Image
+              <img
                 src={theme.image}
                 alt={theme.name}
                 className="w-full h-auto rounded-xl filter grayscale transition-all duration-500 group-hover:filter-none object-cover aspect-video"
@@ -78,3 +77,13 @@ const ThemeSection: React.FC = () => {
 };
 
 export default ThemeSection;
+
+
+
+
+
+
+
+
+
+
