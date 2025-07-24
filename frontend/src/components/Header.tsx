@@ -1,16 +1,23 @@
-// src/components/Header.tsx
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
-// Définir les types des props du Header
 interface HeaderProps {
-  hideSignUpButton?: boolean; // Rendre la prop optionnelle
+  hideSignUpButton?: boolean;
 }
 
 export default function Header({ hideSignUpButton }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  // Avoid rendering on server to prevent hydration mismatch
+  if (!hasMounted) return null;
 
   return (
     <nav className="bg-white relative">
@@ -59,10 +66,9 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
       {/* Navigation Section */}
       <div className="relative border-t border-b border-gray-300 py-3">
         <div className="flex items-center justify-center md:justify-between px-4 md:px-8">
-          {/* Hamburger/X menu button for mobile (centered on mobile) */}
+          {/* Hamburger/X menu button for mobile */}
           <div className="md:hidden">
             <button
-            
               className="p-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle navigation menu"
@@ -75,29 +81,14 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
             </button>
           </div>
 
-          {/* Desktop Navigation Links (centered on desktop) */}
+          {/* Desktop Navigation Links */}
           <div className="hidden md:flex flex-grow justify-center space-x-8 text-gray-700 text-lg">
-            <Link href="/" className="hover:text-black">
-              Home
-            </Link>
-            <Link href="/bien-etre" className="hover:text-black">
-              Bien être
-            </Link>
-            <Link href="/culture" className="hover:text-black">
-              Culture
-            </Link>
-            <Link href="/voyage" className="hover:text-black">
-              {" "}
-              {/* CORRECTED: Changed text to "Voyage" */}
-              Voyage
-            </Link>
-            <Link href="/voiture" className="hover:text-black">
-              Voiture
-            </Link>
-            {/* Add "/danse" link here if you have a "Danse" theme/page */}
-            {/* <Link href="/danse" className="hover:text-black">
-              Danse
-            </Link> */}
+            <Link href="/" className="hover:text-black">Home</Link>
+            <Link href="/culture" className="hover:text-black">Culture</Link>
+            <Link href="/dance" className="hover:text-black">Dance</Link>
+            <Link href="/voyage" className="hover:text-black">Voyage</Link>
+            <Link href="/voiture" className="hover:text-black">Voiture</Link>
+            {/* <Link href="/danse" className="hover:text-black">Danse</Link> */}
           </div>
         </div>
 
@@ -117,45 +108,11 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
             </Link>
           )}
 
-          <Link
-            href="/"
-            className="text-gray-700 text-lg hover:text-black"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            href="/bien-etre"
-            className="text-gray-700 text-lg hover:text-black"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Bien être
-          </Link>
-          <Link
-            href="/culture"
-            className="text-gray-700 text-lg hover:text-black"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Culture
-          </Link>
-          <Link
-            href="/voyage"
-            className="text-gray-700 text-lg hover:text-black"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Voyage
-          </Link>
-          <Link
-            href="/voiture"
-            className="text-gray-700 text-lg hover:text-black"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Voiture
-          </Link>
-          {/* Add "/danse" link here if you have a "Danse" theme/page */}
-          {/* <Link href="/danse" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>
-            Danse
-          </Link> */}
+          <Link href="/" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Home</Link>
+          <Link href="/culture" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Culture</Link>
+          <Link href="/dance" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Dance</Link>
+          <Link href="/voyage" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Voyage</Link>
+          <Link href="/voiture" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Voiture</Link>
         </div>
       </div>
     </nav>

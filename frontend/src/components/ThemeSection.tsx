@@ -12,25 +12,25 @@ const themes: Theme[] = [
     name: "Culture",
     description: "Cinéma, livres, art & expos.",
     bgColor: "#f9fafb",
-    image: "/cinema.jpg",
+    image: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753284292/cinema_pk6obn.jpg",
   },
   {
     name: "Voyage",
     description: "Découvertes et coins de paradis.",
     bgColor: "#f9fafb",
-    image: "/voyage.jpg",
+    image: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753284300/voyage_rvhiar.jpg",
   },
   {
-    name: "Bien-être",
+    name: "Dance",
     description: "Équilibre, rituels & conscience.",
     bgColor: "#f9fafb",
-    image: "/bien.jpg",
+    image: "",
   },
   {
     name: "Automobile",
     description: "Tuning, lifestyle & mécaniques.",
     bgColor: "#f9fafb",
-    image: "/car.jpg",
+    image: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753284291/car_tzhyf2.jpg",
   },
 ];
 

@@ -60,18 +60,18 @@ const Footer: React.FC = () => {
     </li>
     <li>
       <Link
-        href="/bien-etre"
-        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
-      >
-        Bien être
-      </Link>
-    </li>
-    <li>
-      <Link
         href="/culture"
         className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
       >
         Culture
+      </Link>
+    </li>
+    <li>
+      <Link
+        href="/dance"
+        className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
+      >
+        Dance
       </Link>
     </li>
     <li>
