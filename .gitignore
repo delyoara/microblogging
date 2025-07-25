@@ -48,3 +48,5 @@ Thumbs.db
 # notes et fichiers personnels
 frontend/notes.md
 backend/notes.md
+
+.idea/
