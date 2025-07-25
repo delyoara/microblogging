@@ -167,12 +167,13 @@ router.post("/", upload.single('image'), async (req, res) => {
     const postSlug = slug || title.toLowerCase().replace(/\s+/g, '-');
 
     // Manejo de imagen - Upload a Cloudinary si existe
-    let imageUrl = "";
+    let imageUrl = req.body.imageUrl || "";
     if (req.file) {
       const cloudinaryResult = await uploadToCloudinary(req.file.buffer);
       imageUrl = cloudinaryResult.secure_url;
     }
 
+  
     // 1. Vérifier que le thème existe
     const themeExists = await prisma.theme.findUnique({
       where: { id: themeIdInt }
