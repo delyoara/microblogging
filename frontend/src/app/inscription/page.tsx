@@ -12,25 +12,75 @@ const SignUpPage: React.FC = () => {
     username: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
+
+  const [latestUser, setLatestUser] = useState<{
+    prenom: string;
+    nom: string;
+    email: string;
+  } | null>(null);
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [inscriptionRéussie, setInscriptionRéussie] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-      console.log(`${e.target.name} :`, e.target.value);
+    setErrorMessage('');
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-     console.log('Form submitted');
-    await fetch('http://localhost:3001/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(formData),
-    });
+
+    if (formData.password !== formData.confirmPassword) {
+      setErrorMessage("❌ Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3001/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          prenom: formData.prenom,
+          nom: formData.nom,
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setErrorMessage(data.error || "Une erreur est survenue.");
+        return;
+      }
+
+      // Réinitialisation du formulaire + succès
+      setFormData({
+        prenom: '',
+        nom: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      });
+      alert("Compte créé avec succès !");
+      setInscriptionRéussie(true);
+
+      // Récupère le dernier inscrit
+      const resLatest = await fetch('http://localhost:3001/api/auth/latest-user');
+      const latestData = await resLatest.json();
+      setLatestUser(latestData);
+
+    } catch (err) {
+      setErrorMessage("Une erreur réseau s’est produite.");
+      console.error(err);
+    }
   };
 
   return (
@@ -38,7 +88,7 @@ const SignUpPage: React.FC = () => {
       <Header />
       <div className="min-h-screen bg-yellow-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Section gauche - Image */}
+          {/* Image */}
           <div className="flex justify-center items-center">
             <Image
               src="https://res.cloudinary.com/dtbwsvacq/image/upload/v1753284893/journal_abqw1p.jpg"
@@ -49,47 +99,71 @@ const SignUpPage: React.FC = () => {
             />
           </div>
 
-          {/* Section droite - Formulaire */}
+          {/* Formulaire */}
           <div className="flex flex-col justify-center">
             <div className="mb-8 text-center">
               <h2 className="text-3xl font-extrabold text-gray-900">Créez votre compte</h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Rejoignez-nous et exprimez-vous en un éclair ⚡!
-              </p>
+              <p className="mt-2 text-sm text-gray-600">Rejoignez-nous et exprimez-vous en un éclair ⚡</p>
             </div>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
-              {['prenom', 'nom', 'username', 'email', 'password'].map((field) => (
+              {['prenom', 'nom', 'username', 'email'].map((field) => (
                 <div key={field}>
                   <label htmlFor={field} className="block text-sm font-medium text-gray-700">
-                    {field === 'password' ? 'Mot de passe' :
-                     field === 'username' ? 'Username' :
+                    {field === 'username' ? 'Nom d’utilisateur' :
                      field === 'email' ? 'Adresse E-mail' :
                      field === 'nom' ? 'Nom' : 'Prénom'}
                   </label>
-                  <div className="mt-1">
-                    <input
-                      id={field}
-                      name={field}
-                      type={field === 'email' ? 'email' :
-                            field === 'passwordHash' ? 'password' : 'text'}
-                      autoComplete={field}
-                      required
-                     value={formData[field as keyof typeof formData]}
-                      onChange={handleChange}
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-orange-500 sm:text-sm"
-                      placeholder={`Entrez votre ${field === 'passwordHash' ? 'mot de passe' : field}`}
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    name={field}
+                    id={field}
+                    required
+                    value={formData[field as keyof typeof formData]}
+                    onChange={handleChange}
+                    className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-orange-500"
+                    placeholder={`Entrez votre ${field}`}
+                  />
                 </div>
               ))}
 
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-orange-500"
+                  placeholder="••••••••"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                  required
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  className="block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:border-orange-500"
+                  placeholder="••••••••"
+                />
+              </div>
+
+              {errorMessage && (
+                <p className="text-sm text-red-600">{errorMessage}</p>
+              )}
+
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-orange-500"
+                className="w-full py-2 px-4 bg-black text-white rounded-md hover:bg-orange-500"
               >
                 S’inscrire
-                <span className="absolute right-3 top-1/2 transform -translate-y-1/2">&rarr;</span>
               </button>
             </form>
 
@@ -101,6 +175,15 @@ const SignUpPage: React.FC = () => {
                 </a>
               </p>
             </div>
+
+            {/* Affichage du dernier inscrit */}
+            {latestUser && inscriptionRéussie && (
+              <div className="mt-8 bg-green-50 p-4 border border-green-200 rounded-md text-center">
+                <p className="text-sm text-gray-700">
+                   Dernier inscrit : <strong>{latestUser.prenom} {latestUser.nom}</strong> ({latestUser.email})
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
