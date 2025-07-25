@@ -54,12 +54,10 @@ export async function generateStaticParams() {
 }
 
 interface ArticlePageProps {
-  params: { slug?: string };
+  params: { slug: string };
 }
 
-export default async function ArticlePage(context: { params: ArticlePageParams }) {
-  const { params } = context;
-  type ArticlePageParams = { slug: string };
+export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!params?.slug) {
     return notFound();
   }

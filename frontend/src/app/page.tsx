@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import ThemeSection from "@/components/ThemeSection";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
+import CreateAPost from "@/components/CreateAPost";
 
 export default function Home() {
   return (
@@ -74,7 +75,8 @@ export default function Home() {
       </motion.div>
 
       <ThemeSection />
-      <Footer></Footer>
+      <CreateAPost />
+      <Footer />
     </main>
   );
 }
