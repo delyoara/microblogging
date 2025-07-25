@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
             Newsletter
           </h4>
           <p className="font-montserrat text-sm text-gray-600 leading-relaxed">
-Abonnez-vous à ma newsletter pour plus d`&apos;`histoires et d`&apos;`expériences de ma vie.          </p>
+Abonnez-vous à ma newsletter pour plus d&apos;histoires et d&apos;expériences de ma vie.          </p>
           <form className="flex mt-4 w-full max-w-sm"> {/* Added w-full and max-w-sm for form */}
             <input
               type="email"
@@ -122,7 +122,7 @@ Abonnez-vous à ma newsletter pour plus d`&apos;`histoires et d`&apos;`expérien
               type="submit"
               className="bg-black text-white font-semibold py-3 px-6 rounded-r hover:bg-gray-800 transition-colors duration-200"
             >
-            S`&apos;`INSCRIRE
+            S&apos;INSCRIRE
             </button>
           </form>
         </div>
