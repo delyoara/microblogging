@@ -25,7 +25,7 @@ export default function Home() {
             </h2>
 
             <p className="text-lg max-w-3xl text-white/90 drop-shadow">
-              Ici, on mixe culture, bien-être, voyages inspirants et passion
+              Ici, on mixe culture, science & technologie, voyages inspirants et passion
               pour l’automobile. Un espace où l’on partage des découvertes, des
               réflexions, et des instants de vie… toujours avec style,
               curiosité, et un soupçon d’adrénaline.
@@ -57,8 +57,8 @@ export default function Home() {
         expos, tendances et coups de cœur artistiques.
         <br />
         <br />
-        Petronela vous guide vers le bien-être, entre routines holistiques,
-        alimentation consciente et équilibre intérieur.
+        Petronela explore les croisements entre science et technologie,
+         à travers les découvertes qui ont façonné et transforment notre monde.
         <br />
         <br />
         Renaud, lui, vit à fond sa passion pour le tuning et l’univers

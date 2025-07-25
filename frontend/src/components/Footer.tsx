@@ -69,10 +69,10 @@ const Footer: React.FC = () => {
     </li>
     <li>
       <Link
-        href="/dance"
+        href="/science&technologie"
         className="font-montserrat text-sm text-gray-600 hover:text-orange-500 transition-colors duration-200"
       >
-        Dance
+        Science & technologie
       </Link>
     </li>
     <li>

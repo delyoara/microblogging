@@ -75,7 +75,7 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           <div className="hidden md:flex flex-grow justify-center space-x-8 text-gray-700 text-lg">
             <Link href="/" className="hover:text-black">Home</Link>
             <Link href="/culture" className="hover:text-black">Culture</Link>
-            <Link href="/dance" className="hover:text-black">Dance</Link>
+            <Link href="/science&technologie" className="hover:text-black">Science & technologie</Link>
             <Link href="/voyage" className="hover:text-black">Voyage</Link>
             <Link href="/voiture" className="hover:text-black">Voiture</Link>
             {/* <Link href="/danse" className="hover:text-black">Danse</Link> */}
