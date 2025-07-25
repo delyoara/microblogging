@@ -115,3 +115,31 @@ export const logout = (req, res) => {
   res.clearCookie("refreshToken", { httpOnly: true, sameSite: "strict", secure: false });
   res.status(200).json({ message: "Déconnecté avec succès." });
 };
+
+//pour afficher le dernier utilisatuer inscrit 
+
+export const getLatestUser = async(req, res) => {
+  try {
+    const latestUser = await prisma.user.findFirst({
+      orderBy: {
+        createdAt: "desc"
+      },
+      select: {
+        username: true,
+        email: true,
+        prenom: true,
+        nom: true,
+        role: true
+      }
+    });
+
+    if (!latestUser) {
+      return res.status(404).json({ erreur: "Données non trouvées !" });
+    }
+
+    res.json(latestUser);
+  } catch (error) {
+    console.error("Erreur récupération dernier utilisateur :", error);
+    res.status(500).json({ error: "Erreur serveur." });
+  }
+};
