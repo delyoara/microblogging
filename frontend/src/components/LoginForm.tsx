@@ -63,7 +63,7 @@ const LoginForm: React.FC<Props> = ({
       <div className="flex flex-col mt-6 text-center text-gray-600 text-sm">
         Pas encore inscrit.e?{" "}
         <a href="inscription" className="text-black hover:underline font-medium">
-          Creation d`&apos;`un compte
+          Creation d&apos;un compte
         </a>
       </div>
     </div>

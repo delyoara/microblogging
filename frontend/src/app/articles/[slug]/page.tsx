@@ -161,7 +161,7 @@ export default async function ArticlePage(context: { params: ArticlePageParams }
             <div className="w-full h-px "></div>
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-8">
               <p className="text-gray-600 italic">
-                Merci d`&apos;`avoir lu cet article. N`&apos;`hésitez pas à le partager !
+                Merci d&apos;avoir lu cet article. N&apos;hésitez pas à le partager !
               </p>
             </div>
           </div>
