@@ -226,16 +226,163 @@ Forums, garages partagés, amis bricoleurs : écoutez, observez, mais ne vous co
 ## 5. Bricolez comme un·e gamin·e
 Soyez curieux·se, touchez, démontez (et remontez !). Faites-le pour comprendre, pour le plaisir, pas pour cocher une case de “réparateur parfait”.
 `,
-  }
+  },
+  {
+  imageUrl: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753481419/microblog/dmt4eojkqcqvresxpukb.webp",
+  altText: "Les Radium Girls peignant des cadrans luminescents",
+  categoryName: "Santé publique",
+  title: "Quand le radium brillait plus que la vérité",
+  description: "Une tragédie industrielle aux allures fluorescentes, où la science a illuminé... la cupidité.",
+  authorName: "Emma Ruiz",
+  theme: "Science & Technologie",
+  content: `
+Au début du XXe siècle, alors que la radioactivité était encore perçue comme une promesse de modernité, de nombreuses jeunes femmes furent embauchées pour peindre des cadrans de montre avec une peinture au radium. Le résultat ? Une tragédie sanitaire dissimulée sous des couches de vernis… luminescent.
+
+## Le rêve fluorescent
+
+Nous sommes dans les années 1910-1920. Le radium, fraîchement découvert par les Curie, est à la mode. Il brille dans le noir, ce qui en fait une aubaine pour les horlogers. Les ouvrières, appelées plus tard les « Radium Girls », sont chargées de peindre à la main les chiffres des montres. Pour affiner leur pinceau, elles l'humectent… avec leurs lèvres.
+
+Résultat ? Elles ingèrent chaque jour de minuscules doses de radium. On leur promet que c’est inoffensif. Certaines l’utilisent même comme maquillage ou pour faire rire dans le noir.
+
+## Dents qui tombent, mâchoires qui s’effritent
+
+Rapidement, les premières douleurs apparaissent. Dents déchaussées, nécroses osseuses, cancers. Mais les entreprises nient. On accuse les ouvrières d’avoir la syphilis, histoire de discréditer leur témoignage.
+
+Ce n’est qu’après de longues batailles judiciaires que certaines obtiendront réparation. Trop tard pour beaucoup.
+
+## Une lueur de justice
+
+Les Radium Girls ont contribué, malgré elles, à faire avancer le droit du travail et la régulation des substances toxiques. Elles sont devenues le symbole d’un combat pour la reconnaissance des maladies professionnelles et la responsabilité des employeurs.
+
+## Et aujourd’hui ?
+
+Cette histoire nous rappelle que le progrès scientifique, sans éthique, peut littéralement empoisonner. Et que les « lueurs » de la science ne doivent jamais masquer les zones d’ombre de l’industrie.
+`
+},
+{
+  imageUrl: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753481420/microblog/jdhoaufnypvhd2kequbm.jpg",
+
+  altText: "Carte météo du nuage radioactif de Tchernobyl",
+  categoryName: "Nucléaire",
+  title: "Le nuage radioactif... stoppé net à la frontière française ?",
+  description: "En 1986, la catastrophe de Tchernobyl a irradié l’Europe, sauf – paraît-il – la France. Une prouesse météorologique, ou une intox d’État ?",
+  authorName: "Hugo Martin",
+  theme: "Science & Technologie",
+  content: `
+Le 26 avril 1986, le réacteur n°4 de la centrale de Tchernobyl explose. Un nuage radioactif commence alors son voyage au-dessus de l’Europe. Partout, les cartes d’alerte s’affolent... sauf en France. Là, le nuage aurait fait une pause. Respectueusement. À la frontière. 🛑🇫🇷
+
+## Le miracle météorologique
+
+Dès les premiers jours, les autorités françaises affirment que le nuage n’a **pas traversé l’Hexagone**. En Allemagne, on jette les épinards. En Italie, on arrête les récoltes. En France ? On continue à manger les salades arrosées de pluie radioactive. Bon appétit.
+
+## Communication officielle
+
+Des scientifiques français mesurent pourtant une hausse de la radioactivité dans les Alpes, en Corse, en Lorraine. Le professeur Pellerin – alors directeur du Service central de protection contre les rayonnements ionisants – rassure : pas de danger, rien d’alarmant.
+
+## Une omerta bien orchestrée
+
+Les médias relaient largement les discours officiels. Des années plus tard, des journalistes et associations révèlent un effort manifeste pour éviter la panique… et préserver l’image du nucléaire français.
+
+## Conséquences sanitaires
+
+En Corse, une hausse de cancers de la thyroïde est constatée dans les décennies suivantes. Certains médecins et collectifs réclament la reconnaissance d’un lien avec Tchernobyl. L’État, lui, reste discret.
+
+## Ce qu’il en reste
+
+Aujourd’hui encore, l’épisode du “nuage arrêté à la frontière” fait sourire – jaune. Plus que le nuage, c’est le silence qui interroge. Car parfois, ce qu’on ne dit pas en dit très long.
+`
+},
+{
+  imageUrl: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753481417/microblog/i9o3g1omgqccwptbdrzc.jpg",
+
+  altText: "Bio-impression d’un tissu cardiaque humain en laboratoire",
+  categoryName: "Santé publique",
+  title: "Quand l’encre devient vie : la bio-impression d’organes humains",
+  description: "Une technologie où les cellules remplacent l’encre, et où l’imprimante façonne l’espoir.",
+  authorName: "Julien Moreau",
+  theme: "Science & Technologie",
+  content: `
+La bio-impression redéfinit notre rapport à la médecine. Imprimer un cœur, une peau ou un foie ? C’est désormais possible — grâce à des encres faites de cellules vivantes.
+
+## Imprimer, mais le vivant
+Les bio-imprimantes fonctionnent couche par couche, déposant des matériaux biologiques pour recréer des tissus humains. Elles offrent une précision inégalée, rendant possible la fabrication de structures complexes comme des organes miniatures.
+
+## Un accélérateur médical
+Ces « organoïdes » permettent de tester des traitements sans recours aux animaux, avec des résultats plus proches du corps humain réel. Un gain de temps et d’éthique.
+
+## Vers un futur sur mesure
+Demain, on pourrait imprimer des organes personnalisés à partir des cellules du patient. Cela réduirait :
+- les risques de rejet,
+- les délais de greffe,
+- et les souffrances liées aux pénuries.
+
+Mais cette avancée pose aussi des questions : comment gérer la longévité de ces organes ? Quelles limites éthiques fixer ? Une science enthousiasmante, mais à encadrer.
+`
+},
+{
+  imageUrl: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753481418/microblog/sppj4f7pmfi1pep00xsx.jpg",
+  altText: "Panneaux solaires déployés sur la surface lunaire",
+  categoryName: "Énergie",
+  title: "Quand la Lune éclaire notre avenir",
+  description: "Et si la conquête spatiale devenait le laboratoire de notre transition énergétique ?",
+  authorName: "Sofia Herrera",
+  theme: "Science & Technologie",
+  content: `
+La Lune devient un terrain d’expérimentation énergétique et écologique. Des technologies conçues pour survivre au vide spatial pourraient aussi inspirer notre monde terrestre.
+
+## L’énergie venue d’ailleurs
+Des panneaux solaires géants sont prévus pour le pôle Sud lunaire. Capables de suivre la lumière du Soleil, ils pourraient alimenter des bases entières.
+
+## De la poussière, de la vie
+À partir du régolithe — la poussière lunaire — des scientifiques ont réussi à produire :
+- de l’eau,
+- de l’oxygène,
+- et même des matériaux de construction.
+
+## Imprimer pour survivre
+Des imprimantes 3D utilisent cette poussière comme matière première pour bâtir des habitats spatiaux. Pas besoin d’importer depuis la Terre : on construit sur place.
+
+La Lune devient un laboratoire pour une autonomie durable. Une conquête qui éclaire autant nos futurs spatiaux… que nos enjeux terrestres.
+`
+}
 ];
-
 async function main() {
-  console.log(`Start seeding ...`);
+  console.log('Start seeding ...');
 
-  // 1. Création des users (upsert pour éviter doublons)
-  // We'll use a map for both username and full name to store user objects
-  const createdUsers = {}; // Key: username, Value: user object
-  const createdUsersByFullName = {}; // Key: "Prenom Nom", Value: user object
+  //  Étape 0 – Audit des doublons déjà présents dans la base
+  // On identifie les articles qui ont le même titre et le même auteur
+  // sans les supprimer automatiquement (audit seulement)
+  const allPosts = await prisma.post.findMany({
+    select: { id: true, title: true, userId: true },
+    orderBy: { id: 'asc' }, // On conserve l’ordre de création
+  });
+
+  const keySet = new Set(); // Pour stocker les combinaisons uniques titre+auteur
+  const duplicates = [];    // On y met les ID détectés en doublon
+
+  for (const post of allPosts) {
+    const key = `${post.title}-${post.userId}`;
+    if (keySet.has(key)) {
+      duplicates.push(post.id);
+    } else {
+      keySet.add(key);
+    }
+  }
+
+  // Résultat de l'audit
+  if (duplicates.length > 0) {
+    console.log(`🚨 ${duplicates.length} doublon(s) détecté(s) par titre + auteur :`);
+    for (const id of duplicates) {
+      const post = allPosts.find(p => p.id === id);
+      console.log(`- ID: ${id}, Titre: ${post?.title}`);
+    }
+  } else {
+    console.log(' Aucun doublon détecté par contenu');
+  }
+
+  // 👤 Étape 1 – Création ou récupération des utilisateurs
+  const createdUsers = {}; // Accès rapide par username
+  const createdUsersByFullName = {}; // Accès rapide par prénom + nom
 
   for (const user of usersData) {
     const createdUser = await prisma.user.upsert({
@@ -245,15 +392,16 @@ async function main() {
     });
     createdUsers[user.username] = createdUser;
 
-    // Correctly build the full name using 'prenom' and 'nom' from your user data
     const fullName = `${user.prenom} ${user.nom}`;
-    createdUsersByFullName[fullName] = createdUser; // Store the actual user object
+    createdUsersByFullName[fullName] = createdUser;
+
     console.log(`User créé/trouvé : ${createdUser.username} (${fullName})`);
   }
 
-  // 2. Créez ou récupérez vos thèmes
-  const themesToCreate = ['Culture', 'Voiture', 'Danse', 'Voyage'];
+  // Étape 2 – Création ou récupération des thèmes
+  const themesToCreate = ['Culture', 'Voiture', 'Science & Technologie', 'Voyage'];
   const createdThemes = {};
+
   for (const themeName of themesToCreate) {
     const theme = await prisma.theme.upsert({
       where: { name: themeName },
@@ -264,49 +412,51 @@ async function main() {
     console.log(`Created/found theme: ${theme.name} (ID: ${theme.id})`);
   }
 
-  // 3. Create or get categories based on the data
-  // This map will store categories by their name, nested under their theme ID for uniqueness
-  const createdCategories = {}; // structure: { themeId: { categoryName: categoryObject } }
-
-  // First, identify all unique categories and their associated themes from articlesData
+  // Étape 3 – Création ou récupération des catégories associées aux thèmes
+  const createdCategories = {}; // Organisation : themeId → { categoryName: category }
   const categoriesToProcess = new Set();
+
   for (const article of articlesData) {
-      categoriesToProcess.add(JSON.stringify({ name: article.categoryName, themeName: article.theme }));
+    categoriesToProcess.add(JSON.stringify({ name: article.categoryName, themeName: article.theme }));
   }
 
   for (const categoryInfoString of categoriesToProcess) {
-      const { name: categoryName, themeName } = JSON.parse(categoryInfoString);
-      const theme = createdThemes[themeName];
+    const { name: categoryName, themeName } = JSON.parse(categoryInfoString);
+    const theme = createdThemes[themeName];
 
-      if (!theme) {
-          console.warn(`Skipping category "${categoryName}" as theme "${themeName}" was not found.`);
-          continue;
-      }
+    if (!theme) {
+      console.warn(`Thème non trouvé : "${themeName}" → catégorie "${categoryName}" ignorée`);
+      continue;
+    }
 
-      const category = await prisma.category.upsert({
-          where: {
-              name_themeId: {
-                  name: categoryName,
-                  themeId: theme.id,
-              },
-          },
-          update: {},
-          create: {
-              name: categoryName,
-              themeId: theme.id,
-          },
-      });
+    const category = await prisma.category.upsert({
+      where: {
+        name_themeId: {
+          name: categoryName,
+          themeId: theme.id,
+        },
+      },
+      update: {},
+      create: {
+        name: categoryName,
+        themeId: theme.id,
+      },
+    });
 
-      if (!createdCategories[theme.id]) {
-          createdCategories[theme.id] = {};
-      }
-      createdCategories[theme.id][categoryName] = category;
-      console.log(`Category created/found: ${category.name} (ID: ${category.id}, Theme: ${theme.name})`);
+    if (!createdCategories[theme.id]) {
+      createdCategories[theme.id] = {};
+    }
+
+    createdCategories[theme.id][categoryName] = category;
+    console.log(`Category créée/trouvée : ${category.name} (ID: ${category.id}, Thème: ${theme.name})`);
   }
 
+  //  Étape 4 – Insertion des articles (avec vérifications complètes)
+  let insertedCount = 0;
+  let skippedCount = 0;
 
-  // 4. Insertion des articles
   for (const article of articlesData) {
+    // Génération d’un slug unique basé sur le titre
     const slugBase = slugify(article.title, { lower: true, strict: true });
     let uniqueSlug = slugBase;
     let count = 1;
@@ -315,27 +465,39 @@ async function main() {
       uniqueSlug = `${slugBase}-${count++}`;
     }
 
-    // Recherche de l'auteur via son nom complet
+    // Vérification de l’auteur
     const authorUser = createdUsersByFullName[article.authorName];
     if (!authorUser) {
-      console.warn(`Auteur introuvable pour l'article: ${article.title}, auteur: ${article.authorName}. Cet article sera sauté.`);
-      continue; // saute cet article
-    }
-
-    const theme = createdThemes[article.theme];
-    if (!theme) {
-      console.warn(`Thème introuvable pour l'article: ${article.title}. Cet article sera sauté.`);
+      console.warn(`Auteur introuvable : ${article.authorName} → Article sauté : "${article.title}"`);
+      skippedCount++;
       continue;
     }
 
-    // Find the correct category for the article
-    const category = createdCategories[theme.id]?.[article.categoryName];
-    if (!category) {
-        console.warn(`Catégorie introuvable pour l'article: ${article.title}, catégorie: ${article.categoryName}, thème: ${article.theme}. Cet article sera sauté.`);
-        continue;
+    // Vérification du thème
+    const theme = createdThemes[article.theme];
+    if (!theme) {
+      console.warn(`Thème introuvable : ${article.theme} → Article sauté : "${article.title}"`);
+      skippedCount++;
+      continue;
     }
 
+    // Vérification de la catégorie
+    const category = createdCategories[theme.id]?.[article.categoryName];
+    if (!category) {
+      console.warn(`Catégorie introuvable : ${article.categoryName} → Article sauté : "${article.title}"`);
+      skippedCount++;
+      continue;
+    }
 
+    // Vérification finale du slug (sécurité en doublon)
+    const existing = await prisma.post.findUnique({ where: { slug: uniqueSlug } });
+    if (existing) {
+      console.log(`Article déjà existant : "${article.title}" → slug : "${uniqueSlug}"`);
+      skippedCount++;
+      continue;
+    }
+
+    // Création de l’article
     await prisma.post.create({
       data: {
         title: article.title,
@@ -345,22 +507,13 @@ async function main() {
         content: article.content,
         slug: uniqueSlug,
         userId: authorUser.id,
-        themeId: theme.id,
-        categoryId: category.id, // Now dynamically assigned
+        categoryId: category.id,
       },
     });
 
-    console.log(`Article créé : ${article.title} par ${authorUser.prenom} ${authorUser.nom}`);
+    console.log(`📝 Article inséré : "${article.title}" – Auteur : ${article.authorName}`);
+    insertedCount++;
   }
 
-  console.log("Seeding terminé !");
+  console.log(`Résumé du seed : ${insertedCount} article(s) inséré(s), ${skippedCount} sauté(s)`);
 }
-
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
