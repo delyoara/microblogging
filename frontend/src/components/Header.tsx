@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 interface HeaderProps {
   hideSignUpButton?: boolean;
@@ -11,12 +12,12 @@ interface HeaderProps {
 export default function Header({ hideSignUpButton }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
-  // Avoid rendering on server to prevent hydration mismatch
   if (!hasMounted) return null;
 
   return (
@@ -30,25 +31,27 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           Exprime-toi en un éclair⚡
         </p>
 
-        {/* Sign Up button at the top right for DESKTOP ONLY */}
-
-        {/* This will be hidden on mobile, and the button will appear in the mobile menu */}
-        <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
-
-   
-
-        
-        </div>
-
-        {/* Ce bouton est masqué si hideSignUpButton est vrai */}
-        {!hideSignUpButton && ( // Condition pour masquer le bouton
+        {/* Zone en haut à droite (version desktop) */}
+        {!hideSignUpButton && (
           <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
-            <Link
-              href="/login"
-              className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200"
-            >
-              Login
-            </Link>
+            {user ? (
+              <Link href="/user" className="flex items-center space-x-3 text-gray-700 hover:underline">
+                <span className="text-lg font-medium">{user.prenom}</span>
+                <img
+                  // src={user.avatarUrl || "/default-avatar.webp"}
+                    src={"/default-avatar.webp"}
+                  alt="Avatar utilisateur"
+                  className="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
+                />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200"
+              >
+                Login
+              </Link>
+            )}
           </div>
         )}
       </div>
@@ -63,11 +66,7 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle navigation menu"
             >
-              {isMenuOpen ? (
-                <X className="w-7 h-7" />
-              ) : (
-                <Menu className="w-7 h-7" />
-              )}
+              {isMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
             </button>
           </div>
 
@@ -78,7 +77,6 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
             <Link href="/science-technologie" className="hover:text-black">Science & technologie</Link>
             <Link href="/voyage" className="hover:text-black">Voyage</Link>
             <Link href="/voiture" className="hover:text-black">Voiture</Link>
-            {/* <Link href="/danse" className="hover:text-black">Danse</Link> */}
           </div>
         </div>
 
@@ -89,13 +87,25 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           } flex-col items-center space-y-4 md:hidden`}
         >
           {!hideSignUpButton && (
-            <Link
-              href="/login"
-              className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200 mb-4"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Login
-            </Link>
+            user ? (
+              <Link href="/user" className="flex items-center space-x-3 text-gray-700 mb-4 hover:underline">
+                <span className="text-lg font-medium">{user.prenom}</span>
+                <img
+                  //src={user.avatarUrl || "/default-avatar.webp"}
+                    src={"/default-avatar.webp"}
+                  alt="Avatar utilisateur"
+                  className="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
+                />
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="px-6 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 hover:border-black transition-colors duration-200 mb-4"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )
           )}
 
           <Link href="/" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Home</Link>
