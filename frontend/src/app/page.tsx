@@ -75,7 +75,6 @@ export default function Home() {
       </motion.div>
 
       <ThemeSection />
-      <CreateAPost />
       <Footer />
     </main>
   );
