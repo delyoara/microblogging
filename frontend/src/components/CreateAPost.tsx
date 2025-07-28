@@ -1,11 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 export default function CreateAPost() {
   const router = useRouter();
 
   // États du formulaire
+  const { user } = useAuth(); 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [categoryName, setCategoryName] = useState("");
@@ -41,6 +43,12 @@ export default function CreateAPost() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!user) {
+  alert("Vous devez être connecté pour créer un post.");
+  setIsSubmitting(false);
+  return;
+}
+
     if (isSubmitting) return; // Empêcher la double soumission
 
     setIsSubmitting(true);
@@ -53,7 +61,7 @@ export default function CreateAPost() {
     }
 
     const formData = {
-      userId: 3,
+       userId: user?.id,
       themeId: parseInt(themeId),
       categoryName: categoryName.trim(),
       title: title.trim(),

@@ -4,7 +4,10 @@ import Header from "@/components/Header";
 import ThemeSection from "@/components/ThemeSection";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
-import CreateAPost from "@/components/CreateAPost";
+
+import { AuthProvider } from "@/context/AuthContext";
+
+
 
 export default function Home() {
   return (
