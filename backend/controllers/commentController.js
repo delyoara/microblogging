@@ -16,18 +16,6 @@ export const getAllComments = async (req, res) => {
     }
 };
 
-// GET /api/comments/:id 
-export const getcommentById = async (req, res) => {
-    try {
-        const comment = await prisma.comment.findUnique({
-            where: {id},
-            include: {user: true, post: true},
-        });
-        if (!comment) return res.status(404).json({error: 'Commentaire non trouvé'});
-    } catch (error) {
-        res.status(500).json({error: 'Erreur lors de la récupération des commentaires'});
-    }
-};
 
 // GET /api/comments/:id
 export const getCommentById = async (req, res) => {

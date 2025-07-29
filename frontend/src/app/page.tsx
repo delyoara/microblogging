@@ -5,7 +5,6 @@ import ThemeSection from "@/components/ThemeSection";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
 
-import { AuthProvider } from "@/context/AuthContext";
 
 
 
