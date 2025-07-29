@@ -55,28 +55,33 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         const res = await fetch("http://localhost:3001/api/auth/refresh-token", {
           method: "POST",
-          credentials: "include",
+          credentials: "include", // Important si usas cookies HttpOnly
+          headers: {
+            "Content-Type": "application/json",
+          },
         });
 
-        if (res.ok) {
-          const data = await res.json();
-          setToken(data.accessToken);
-          setAccessToken(data.accessToken); // 🔐 update global
-          setUser(data.user);
-          console.log("🔄 Token rafraîchi !");
-        } else {
-          throw new Error("Échec du refresh token");
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.error || "Échec du refresh token");
         }
-      } catch (err) {
-        console.error("Erreur lors du refresh :", err);
+
+        const data = await res.json();
+        setToken(data.accessToken);
+        setAccessToken(data.accessToken); // 🔐 update global
+        setUser(data.user);
+        console.log("🔄 Token rafraîchi !");
+      } catch (err: any) {
+        console.error("Erreur lors du refresh :", err.message || err);
         setToken(null);
         setAccessToken(null);
         setUser(null);
+        router.push("/login"); // Redirige al login si falla el refresh
       }
     };
 
     refresh();
-  }, []);
+  }, [router]);
 
   const login = (newToken: string, user: User) => {
     setToken(newToken);

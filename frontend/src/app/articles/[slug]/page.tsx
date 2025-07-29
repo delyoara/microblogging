@@ -169,8 +169,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
         <div className="mt-16 pt-8 border-t border-gray-200">
           <Link
-            href="/articles"
-            className="inline-flex items-center text-black hover:text-blue-800 text-lg font-medium transition-colors duration-200 group"
+ href={`/${encodeURIComponent(article.theme.toLowerCase())}`}            className="inline-flex items-center text-black hover:text-blue-800 text-lg font-medium transition-colors duration-200 group"
           >
             <svg
               className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform duration-200"

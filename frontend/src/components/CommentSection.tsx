@@ -85,87 +85,111 @@ const LOCAL_STORAGE_TOKEN_KEY = 'accessToken';  // const LOCAL_STORAGE_TOKEN_KEY
     }
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // ... existing imports and state ...
 
-    if (!newComment.trim()) {
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!newComment.trim()) {
+    return;
+  }
+
+  if (!isAuthenticated) {
+    setError("Vous devez être connecté pour publier un commentaire.");
+    return;
+  }
+
+  setIsSubmitting(true);
+  setError(null);
+
+  try {
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+
+    const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
+    // Ensure you're handling the 'accessToken' prefix correctly if it's there
+    const actualJwt = token?.startsWith('accessToken') ? token.substring('accessToken'.length) : token;
+
+    if (!actualJwt) {
+      setError("Erreur: Jeton d'authentification manquant. Veuillez vous reconnecter.");
+      setIsSubmitting(false);
       return;
     }
 
-    if (!isAuthenticated) {
-      setError("Vous devez être connecté pour publier un commentaire.");
-      return;
-    }
+    headers['Authorization'] = `Bearer ${actualJwt}`;
 
-    setIsSubmitting(true);
-    setError(null);
-
+    // ✅ NEW: Decode the JWT to get the userId
+    let userId;
     try {
-      const headers: Record<string, string> = {
-        "Content-Type": "application/json",
-      };
-
-      const token = localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY);
-      
-      // ✅ If the token is being saved with the "accessToken" prefix (e.g. "accessTokeneyJ..."),
-      // uncomment and use this line. If you fix your login to save only the JWT, then remove it.
-      const actualJwt = token?.startsWith('accessToken') ? token.substring('accessToken'.length) : token;
-
-      if (actualJwt) { // Use actualJwt after potential stripping
-        headers['Authorization'] = `Bearer ${actualJwt}`;
-      } else {
-        setError("Erreur: Jeton d'authentification manquant. Veuillez vous reconnecter.");
-        setIsSubmitting(false);
-        return;
+      const payload = JSON.parse(atob(actualJwt.split('.')[1]));
+      // IMPORTANT: Verify the actual key for userId in your JWT payload.
+      // It's commonly 'sub' (subject) or 'id'. Use the correct one.
+      userId = Number(payload.sub || payload.id); 
+      if (isNaN(userId)) {
+        throw new Error("User ID could not be extracted from token.");
       }
-
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts/${postId}/comments`, // Use postId for the request
-        {
-          method: "POST",
-          headers,
-          credentials: "include", // Important for sending cookies, if your auth uses them
-          body: JSON.stringify({
-            content: newComment.trim()
-          }),
-        }
-      );
-
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({ message: 'Erreur inconnue' }));
-        throw new Error(
-          errorData.message || `Erreur ${res.status}: ${res.statusText}`
-        );
-      }
-
-      const comment = await res.json();
-      // Ensure the structure of the new comment matches your Comment interface
-      const formattedNewComment: Comment = {
-          id: comment.id,
-          content: comment.content,
-          userId: comment.userId,
-          postId: comment.postId,
-          createdAt: comment.createdAt,
-          user: {
-              id: comment.user.id,
-              username: comment.user.username,
-              prenom: comment.user.prenom,
-              nom: comment.user.nom,
-          }
-      };
-      setComments(prevComments => [formattedNewComment, ...prevComments]); // Add new comment to the top
-      setNewComment(""); // Clear the input field
-    } catch (err) {
-      console.error('Erreur lors de la soumission du commentaire:', err);
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Erreur lors de la publication du commentaire'
-      );
-    } finally {
-      setIsSubmitting(false); // Reset submitting state
+    } catch (decodeError) {
+      console.error("Error decoding JWT or extracting userId:", decodeError);
+      setError("Erreur: Impossible d'identifier l'utilisateur. Veuillez vous reconnecter.");
+      setIsSubmitting(false);
+      return;
     }
-  };
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts/${postId}/comments`,
+      {
+        method: "POST",
+        headers,
+        credentials: "include",
+        body: JSON.stringify({
+          content: newComment.trim(),
+          postId: Number(postId),
+          userId: userId, // ✅ Use the extracted userId here
+        }),
+      }
+    );
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("💥 Backend error raw:", errorText);
+      throw new Error(`Erreur ${res.status}: ${errorText}`);
+    }
+
+    const comment = await res.json();
+    console.log("🧾 Respuesta del backend (comment):", comment);
+
+    // ✅ Add null/undefined checks for safety, though the backend should return it.
+    // If 'comment.user' is sometimes undefined, you'll need to handle it gracefully.
+    // For now, assume it's there as per your backend's design.
+    const formattedNewComment: Comment = {
+      id: comment.id,
+      content: comment.content,
+      userId: comment.userId,
+      postId: comment.postId,
+      createdAt: comment.createdAt,
+      user: {
+        id: comment.user?.id, // Use optional chaining for safety
+        username: comment.user?.username,
+        prenom: comment.user?.prenom,
+        nom: comment.user?.nom,
+      }
+    };
+    
+    setComments(prevComments => [formattedNewComment, ...prevComments]);
+    setNewComment("");
+  } catch (err) {
+    console.error('Erreur lors de la soumission du commentaire:', err);
+    setError(
+      err instanceof Error
+        ? err.message
+        : 'Erreur lors de la publication du commentaire'
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   return (
     <section className="mt-16 bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
