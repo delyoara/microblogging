@@ -23,6 +23,12 @@ model User {
   posts        Post[]
 }
 
+enum PostStatus {
+  pending
+  approved
+  rejected
+}
+
 model Post {
   id          Int       @id @default(autoincrement())
   userId      Int
@@ -35,6 +41,7 @@ model Post {
   slug        String    @unique
   content     String
   createdAt   DateTime  @default(now())
+  status      PostStatus @default(pending)
   comments    Comment[]
   likes       Like[]
   category    Category  @relation(fields: [categoryId], references: [id])

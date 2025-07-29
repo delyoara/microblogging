@@ -24,7 +24,7 @@ const themes: Theme[] = [
     name: "Science et technologie",
     description: "Recherche, innovation et impact",
     bgColor: "#f9fafb",
-    image: "https://res.cloudinary.com/dtbwsvacq/image/upload/v1753348220/pole-dance-1287822_1280_cotybp.jpg",
+    image: "science_techno.jpg",
   },
   {
     name: "Automobile",
