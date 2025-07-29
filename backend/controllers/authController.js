@@ -8,7 +8,16 @@ const REFRESH_SECRET = process.env.REFRESH_SECRET || "refreshtoken_secret";
 
 // Génère un token JWT
 const generateAccessToken = (user) =>
-  jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, { expiresIn: "1h" });
+  jwt.sign(
+    {
+      id: user.id,           
+      email: user.email, 
+      role: user.role,
+    },
+    JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+
 
 const generateRefreshToken = (user) =>
   jwt.sign({ userId: user.id }, REFRESH_SECRET, { expiresIn: "7d" });
@@ -27,7 +36,13 @@ export const signup = async (req, res) => {
 
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
-      data: { username, email, passwordHash, prenom, nom },
+      data: { username, 
+        email, 
+        passwordHash, 
+        prenom, 
+        nom,
+        role: "USER",
+       },
     });
 
     res.status(201).json({ message: "Inscription réussie !" });
