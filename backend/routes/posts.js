@@ -1,5 +1,7 @@
 import express from "express";
 import prisma from "../lib/prisma.js";
+import { toggleLike } from '../controllers/likeController.js'; 
+
 
 const router = express.Router();
 import { upload, uploadToCloudinary } from '../middleware/upload.js';
@@ -333,5 +335,8 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json({ error: "Erreur lors de la suppression du post." });
   }
 });
+
+// Add the route for liking/unliking a post
+router.post("/:postId/like", toggleLike); 
 
 export default router;
