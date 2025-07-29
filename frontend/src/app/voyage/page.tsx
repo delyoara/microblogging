@@ -31,8 +31,8 @@ interface TopNewsArticleProps {
 // Function to fetch articles specifically for the "Voyage" theme
 async function getVoyageArticles(): Promise<ArticleSummary[]> {
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  console.log("Fetching voyage articles from:", `${backendUrl}/api/posts?theme=voyage`);
-  const res = await fetch(`${backendUrl}/api/posts?theme=voyage`, {
+  console.log("Fetching voyage articles from:", `${backendUrl}/api/posts?theme=Voyage`);
+  const res = await fetch(`${backendUrl}/api/posts?theme=Voyage`, {
     cache: 'no-store',
   });
   if (!res.ok) {
@@ -45,9 +45,8 @@ async function getVoyageArticles(): Promise<ArticleSummary[]> {
 
 // Function to fetch top news articles for the "Voyage" theme
 async function getTopVoyageNews(): Promise<TopNewsArticleProps[]> {
-  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-  const res = await fetch(`${backendUrl}/api/posts/top-posts?theme=voyage`, {
-    cache: 'no-store',
+   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/posts/top-posts?theme=Voyage`, {
+    cache: 'no-store', // Also disable caching here
   });
   if (!res.ok) {
     const errorBody = await res.text();
