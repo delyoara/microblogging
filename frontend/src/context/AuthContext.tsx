@@ -30,11 +30,15 @@ type AuthContextType = {
 let _accessToken: string | null = null;
 
 export function getAccessToken() {
-  return _accessToken;
+  return _accessToken ?? (typeof window !== "undefined" ? localStorage.getItem("accessToken") : null);
 }
 
 export function setAccessToken(token: string | null) {
   _accessToken = token;
+  if (typeof window !== "undefined") {
+    if (token) localStorage.setItem("accessToken", token);
+    else localStorage.removeItem("accessToken");
+  }
 }
 
 // --- Contexte React ---
@@ -42,10 +46,10 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(getAccessToken());
   const router = useRouter();
 
-  // 🟢 Quand le composant est monté, essayer de rafraîchir le token
+  // 🟢 Rafraîchissement du token au montage
   useEffect(() => {
     const refresh = async () => {
       try {
@@ -57,11 +61,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         if (res.ok) {
           const data = await res.json();
           setToken(data.accessToken);
-          setAccessToken(data.accessToken); // 🔑 met à jour la variable globale
+          setAccessToken(data.accessToken); // 🔐 update global
           setUser(data.user);
+          console.log("🔄 Token rafraîchi !");
+        } else {
+          throw new Error("Échec du refresh token");
         }
       } catch (err) {
-        console.error("Erreur lors du refresh token :", err);
+        console.error("Erreur lors du refresh :", err);
         setToken(null);
         setAccessToken(null);
         setUser(null);
@@ -73,8 +80,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (newToken: string, user: User) => {
     setToken(newToken);
-    setAccessToken(newToken); // 🔑 met à jour la variable globale
+    setAccessToken(newToken);
     setUser(user);
+    console.log("✅ Connecté :", user);
   };
 
   const logout = async () => {
@@ -87,7 +95,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.error("Erreur logout :", err);
     }
     setToken(null);
-    setAccessToken(null); // 🔑 nettoyage
+    setAccessToken(null);
     setUser(null);
     router.push("/login");
   };

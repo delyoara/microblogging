@@ -36,10 +36,16 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           <div className="hidden md:block absolute top-4 right-4 md:top-8 md:right-8">
             {user ? (
               <Link href="/user" className="flex items-center space-x-3 text-gray-700 hover:underline">
-                <span className="text-lg font-medium">{user.prenom}</span>
+                <span className="text-lg font-medium flex items-center">
+                  {user.prenom}
+                  {user.role === "ADMIN" && (
+                    <span className="ml-2 px-2 py-1 text-base bg-white rounded-full font-bold">
+                      👑
+                    </span>
+                  )}
+                </span>
                 <img
-                  // src={user.avatarUrl || "/default-avatar.webp"}
-                    src={"/default-avatar.webp"}
+                  src={"/default-avatar.webp"}
                   alt="Avatar utilisateur"
                   className="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
                 />
@@ -89,10 +95,16 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
           {!hideSignUpButton && (
             user ? (
               <Link href="/user" className="flex items-center space-x-3 text-gray-700 mb-4 hover:underline">
-                <span className="text-lg font-medium">{user.prenom}</span>
+                <span className="text-lg font-medium flex items-center">
+                  {user.prenom}
+                  {user.role === "ADMIN" && (
+                    <span className="ml-2 px-2 py-1 text-xs bg-orange-500 text-white rounded-full font-bold">
+                      ADMIN
+                    </span>
+                  )}
+                </span>
                 <img
-                  //src={user.avatarUrl || "/default-avatar.webp"}
-                    src={"/default-avatar.webp"}
+                  src={"/default-avatar.webp"}
                   alt="Avatar utilisateur"
                   className="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm"
                 />

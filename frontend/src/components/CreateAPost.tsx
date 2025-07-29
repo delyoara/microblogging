@@ -170,7 +170,7 @@ export default function CreateAPost() {
                 <option value="">-- Choisir un thème --</option>
                 <option value="1">Culture</option>
                 <option value="2">Voiture</option>
-                <option value="3">Danse</option>
+                <option value="3">Science & Technologie</option>
                 <option value="4">Voyage</option>
               </select>
             </div>

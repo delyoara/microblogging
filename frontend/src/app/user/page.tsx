@@ -6,8 +6,7 @@ import Header from "@/components/Header";
 import CreateAPost from "@/components/CreateAPost";
 import { useAuth } from "@/context/AuthContext";
 import { fetchWithAuth } from "../utils/fetchWithAuth";
-
-
+import AdminDashboard from "@/components/AdminDashboard"
 
 interface Post {
   id: string;
@@ -16,7 +15,7 @@ interface Post {
   content: string;
 }
 
-type View = "info" | "create-post" | "my-posts";
+type View = "info" | "create-post" | "my-posts"| "admin-dashboard";
 
 export default function UserPage() {
   const { user, token, logout } = useAuth();
@@ -97,59 +96,93 @@ useEffect(() => {
             <button onClick={() => setCurrentView("create-post")} className={`px-4 py-2 rounded-lg ${currentView === "create-post" ? "bg-orange-300 text-black" : "bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-black"}`}>Créer un post</button>
             <button onClick={() => setCurrentView("my-posts")} className={`px-4 py-2 rounded-lg ${currentView === "my-posts" ? "bg-orange-300 text-black" : "bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-black"}`}>Mes posts</button>
             <button onClick={() => setShowLogoutModal(true)} className="px-4 py-2 rounded-lg bg-black text-white hover:bg-orange-300 hover:text-black shadow-md">Déconnexion</button>
+         {user.role === "ADMIN" && (
+        <button
+        onClick={() => setCurrentView("admin-dashboard")}
+        className={`px-4 py-2 rounded-lg ${
+        currentView === "admin-dashboard"
+        ? "bg-orange-300 text-black"
+        : "bg-gray-200 text-gray-700 hover:bg-blue-100 hover:text-black"
+    }`}
+  >
+    Espace Admin
+  </button>
+)}
           </nav>
         </header>
 
-        <main className="bg-white p-6 rounded-lg shadow-md">
-          {currentView === "info" && (
-            <section>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Mes informations</h2>
-              <div className="space-y-3">
-                <p><strong>Prénom :</strong> {user.prenom}</p>
-                <p><strong>Nom :</strong> {user.nom}</p>
-                <p><strong>Username :</strong> {user.username}</p>
-                <p><strong>Email :</strong> {user.email}</p>
-              </div>
-            </section>
-          )}
+ <main className="bg-white p-6 rounded-lg shadow-md">
+  {/* Vue informations utilisateur */}
+  {currentView === "info" && (
+    <section>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Mes informations</h2>
+      <div className="space-y-3">
+        <p><strong>Prénom :</strong> {user.prenom}</p>
+        <p><strong>Nom :</strong> {user.nom}</p>
+        <p><strong>Username :</strong> {user.username}</p>
+        <p><strong>Email :</strong> {user.email}</p>
+        <p><strong>Rôle :</strong> {user.role}</p>
+      </div>
+    </section>
+  )}
 
-          {currentView === "create-post" && <CreateAPost />}
+  {/* Vue création de post */}
+  {currentView === "create-post" && <CreateAPost />}
 
-          {currentView === "my-posts" && (
-            <section>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Mes posts</h2>
-              {posts.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {posts.map((post) => (
-                    <div key={post.id} className="bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md">
-                      {editingPostId === post.id ? (
-                        <>
-                          <input type="text" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} className="w-full mb-2 p-2 border rounded" />
-                          <textarea value={editContent} onChange={(e) => setEditContent(e.target.value)} className="w-full mb-2 p-2 border rounded" />
-                          <div className="flex justify-end space-x-2">
-                            <button onClick={handleCancelEdit} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Annuler</button>
-                            <button onClick={() => handleUpdatePost(post.id)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Valider</button>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <h3 className="text-xl font-semibold">{post.title}</h3>
-                          <p className="text-sm text-gray-600 mb-3">{post.content.substring(0, 100)}...</p>
-                          <div className="flex justify-end space-x-2">
-                            <button onClick={() => startEdit(post)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Modifier</button>
-                            <button onClick={() => setPostToDelete(post.id)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Supprimer</button>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  ))}
-                </div>
+  {/* Vue posts utilisateur */}
+  {currentView === "my-posts" && (
+    <section>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Mes posts</h2>
+      {posts.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <div key={post.id} className="bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md">
+              {editingPostId === post.id ? (
+                <>
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    className="w-full mb-2 p-2 border rounded"
+                  />
+                  <textarea
+                    value={editContent}
+                    onChange={(e) => setEditContent(e.target.value)}
+                    className="w-full mb-2 p-2 border rounded"
+                  />
+                  <div className="flex justify-end space-x-2">
+                    <button onClick={handleCancelEdit} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Annuler</button>
+                    <button onClick={() => handleUpdatePost(post.id)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Valider</button>
+                  </div>
+                </>
               ) : (
-                <p className="text-gray-600">Vous n'avez pas encore de posts.</p>
+                <>
+                  <h3 className="text-xl font-semibold">{post.title}</h3>
+                  <p className="text-sm text-gray-600 mb-3">{post.content.substring(0, 100)}...</p>
+                  <div className="flex justify-end space-x-2">
+                    <button onClick={() => startEdit(post)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Modifier</button>
+                    <button onClick={() => setPostToDelete(post.id)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Supprimer</button>
+                  </div>
+                </>
               )}
-            </section>
-          )}
-        </main>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-600">Vous n'avez pas encore de posts.</p>
+      )}
+    </section>
+  )}
+
+  {/* Vue admin visible uniquement pour ADMIN */}
+  {currentView === "admin-dashboard" && user.role === "ADMIN" && (
+    <section className="mt-6">
+      {/* <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Zone d’administration</h2> */}
+      <AdminDashboard />
+    </section>
+  )}
+</main>
+
 
         {postToDelete && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">

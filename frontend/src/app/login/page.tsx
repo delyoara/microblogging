@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
@@ -7,6 +6,7 @@ import LoginForm from "@/components/LoginForm";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
