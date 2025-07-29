@@ -122,7 +122,7 @@ export default function Header({ hideSignUpButton }: HeaderProps) {
 
           <Link href="/" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Home</Link>
           <Link href="/culture" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Culture</Link>
-          <Link href="/dance" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Dance</Link>
+          <Link href="/science-technologie" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Science & Technologie</Link>
           <Link href="/voyage" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Voyage</Link>
           <Link href="/voiture" className="text-gray-700 text-lg hover:text-black" onClick={() => setIsMenuOpen(false)}>Voiture</Link>
         </div>

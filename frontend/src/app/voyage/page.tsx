@@ -89,7 +89,7 @@ const VoyagePage: React.FC = async () => {
 
           <section className="ml-8 w-1/3 min-w-[300px] hidden lg:block">
             <h2 className="font-josefin text-2xl font-bold text-gray-900 mb-6">
-              Top News Voyage
+              Le plus populaire 
             </h2>
             <div className="grid grid-cols-1 gap-6">
               {topVoyageNews.length > 0 ? (
