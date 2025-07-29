@@ -68,7 +68,13 @@ export const getCommentsByPost = async (req, res, next) => {
 
 // POST /api/comments - Créer un commentaire
 export const createComment = async (req, res) => {
-  const { userId, postId, content } = req.body;
+  const postId = parseInt(req.params.postId);
+  const { userId, content } = req.body;
+
+  if (isNaN(postId)) {
+    return res.status(400).json({ error: "PostId invalide" });
+  }
+
   try {
     const newComment = await prisma.comment.create({
       data: {
@@ -77,11 +83,29 @@ export const createComment = async (req, res) => {
         post: { connect: { id: postId } },
       },
     });
-    res.status(201).json(newComment);
+
+    const commentWithUser = await prisma.comment.findUnique({
+      where: { id: newComment.id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            prenom: true,
+            nom: true,
+          },
+        },
+      },
+    });
+
+    res.status(201).json(commentWithUser);
   } catch (error) {
+    console.error(error);
     res.status(400).json({ error: 'Erreur lors de la création du commentaire' });
   }
 };
+
+
 
 // PUT /api/comments/:id - Modifier un commentaire
 export const updateComment = async (req, res) => {
