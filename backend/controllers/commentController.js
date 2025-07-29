@@ -33,19 +33,38 @@ export const getCommentById = async (req, res) => {
 };
 
 // GET /api/posts/:postId/comments - Tous les commentaires d’un post
-export const getCommentsByPost = async (req, res) => {
-  const postId = parseInt(req.params.postId);
+export const getCommentsByPost = async (req, res, next) => {
+  console.log('[getCommentsByPost] Handler called for postId:', req.params.postId); // Add this log
   try {
+    const postId = parseInt(req.params.postId);
+    if (isNaN(postId)) {
+      return res.status(400).json({ message: "ID de publication invalide" });
+    }
+
     const comments = await prisma.comment.findMany({
-      where: { postId },
-      include: { user: true },
-      orderBy: { createdAt: 'desc' },
+      where: { postId: postId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            prenom: true, // Make sure these fields exist in your User model
+            nom: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
     });
-    res.json(comments);
+    console.log('[getCommentsByPost] Comments fetched:', comments.length); // Add this log
+    res.status(200).json(comments);
   } catch (error) {
-    res.status(500).json({ error: 'Erreur lors de la récupération des commentaires du post' });
+    console.error('Erreur lors de la récupération des commentaires:', error);
+    next(error); // Pass error to your error handler
   }
 };
+
 
 // POST /api/comments - Créer un commentaire
 export const createComment = async (req, res) => {
