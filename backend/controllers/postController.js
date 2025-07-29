@@ -3,14 +3,22 @@ import prisma from '../lib/prisma.js';
 // GET /api/posts
 export const getAllPosts = async (req, res) => {
   try {
+    const {theme} = req.query;
     const posts = await prisma.post.findMany({
-      include: {
-        user: true,
-        category: true, // si tu as remplacé theme par category
-        comments: true,
-        likes: true,
-      },
-    });
+  where: {
+    theme: {
+      equals: themeFromQuery,   // ex: "Voyage"
+      mode: 'insensitive',      // 👈 pour éviter les erreurs de casse
+    },
+  },
+  include: {
+    user: true,
+    category: true,
+    comments: true,
+    likes: true,
+  },
+});
+
     res.json(posts);
   } catch (error) {
     res.status(500).json({ error: 'Erreur lors de la récupération des posts' });
