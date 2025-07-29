@@ -4,6 +4,7 @@ import prisma from '../lib/prisma.js';
 //  GET /api/posts
 export const getAllPosts = async (req, res) => {
   try {
+    const {theme} = req.query;
     const posts = await prisma.post.findMany({
       include: {
         user: true,
