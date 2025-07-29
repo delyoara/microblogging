@@ -1,6 +1,8 @@
 import express from "express";
 import prisma from "../lib/prisma.js";
 import { upload, uploadToCloudinary } from '../middleware/upload.js';
+import { PostStatus } from "@prisma/client"; 
+
 
 const router = express.Router();
 
@@ -28,8 +30,7 @@ router.get("/top-posts", async (req, res) => {
 
   try {
     const whereClause = {
-      status: 'approved',
-      ...(theme ? { theme: { name: { equals: theme } } } : {})
+status: PostStatus.approved,      ...(theme ? { theme: { name: { equals: theme } } } : {})
     };
 
     const topPosts = await prisma.post.findMany({
@@ -56,14 +57,14 @@ router.get("/top-posts", async (req, res) => {
   }
 });
 
-// GET /api/posts?theme=Culture
+// GET /api/posts?theme=...
 router.get("/", async (req, res) => {
   const { theme } = req.query;
   console.log("ON REGARDE", theme);
 
   try {
     const whereClause = {
-      status: 'approved',
+status: PostStatus.approved,
       ...(theme ? { theme: { name: { equals: theme } } } : {})
     };
 
