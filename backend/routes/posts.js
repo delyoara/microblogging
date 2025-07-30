@@ -323,6 +323,27 @@ router.put("/:id", upload.single('image'), async (req, res) => {
   }
 });
 
+//MODIFY /api/posts/modify/:id
+router.put('/modify/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  try {
+    const updatedPost = await prisma.post.update({
+      where: { id: Number(id) },
+      data: {
+        title,
+        content,
+      },
+    });
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    console.error("Erreur update :", error);
+    res.status(500).json({ error: "Impossible de mettre à jour le post." });
+  }
+});
+
 // DELETE /api/posts/:id
 router.delete("/:id", async (req, res) => {
   const postId = parseInt(req.params.id);
@@ -335,6 +356,54 @@ router.delete("/:id", async (req, res) => {
     res.status(400).json({ error: "Erreur lors de la suppression du post." });
   }
 });
+
+
+// GET /api/posts/all-posts
+router.get("/tip-posts", async (req, res) => {
+  const { theme } = req.query;
+
+   try {
+    const whereClause = theme ? { theme: { name: { equals: theme } } } : {};
+
+    const topPosts = await prisma.post.findMany({
+      where: whereClause,
+      select: {
+        slug: true,
+        imageUrl: true,
+        altText: true,
+        title: true,
+        description: true,
+        createdAt: true,
+        user: { select: { prenom: true, nom: true } },
+        theme: { select: { name: true } },
+        category: { select: { name: true } },
+      },
+      orderBy: { createdAt: "desc" },
+      take: 3,
+    });
+
+    const formattedTopPosts = topPosts.map((post) => ({
+      slug: post.slug,
+      imageUrl: post.imageUrl,
+      altText: post.altText,
+      title: post.title,
+      description: post.description,
+      categoryName: post.category?.name || "Unknown",
+      authorName: post.user
+        ? `${post.user.prenom} ${post.user.nom}`
+        : "Anonymous",
+      theme: post.theme?.name || "Unknown",
+    }));
+
+    res.json(formattedTopPosts);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des top posts:", error);
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération des top posts." });
+  }
+});
+
 
 // Add the route for liking/unliking a post
 router.post("/:postId/like", toggleLike); 

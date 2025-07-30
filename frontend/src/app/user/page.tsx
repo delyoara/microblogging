@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { fetchWithAuth } from "../utils/fetchWithAuth";
 import AdminDashboard from "@/components/AdminDashboard"
 
+
 interface Post {
   id: string;
   userId: string;
@@ -25,6 +26,7 @@ export default function UserPage() {
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
   const [postToDelete, setPostToDelete] = useState<string | null>(null);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   // Charger les posts de l'utilisateur connecté
@@ -54,14 +56,9 @@ useEffect(() => {
     setEditTitle(post.title);
     setEditContent(post.content);
   };
-
-  const handleCancelEdit = () => {
-    setEditingPostId(null);
-    setEditTitle("");
-    setEditContent("");
-  };
-
-  const handleUpdatePost = (id: string) => {
+  
+  //Pour créer un post
+  const handleCreatePost = (id: string) => {
     const updatedPosts = posts.map((post) =>
       post.id === id ? { ...post, title: editTitle, content: editContent } : post
     );
@@ -69,12 +66,88 @@ useEffect(() => {
     handleCancelEdit();
   };
 
-  const confirmDeletePost = () => {
-    if (postToDelete) {
-      setPosts(posts.filter((post) => post.id !== postToDelete));
-      setPostToDelete(null);
-    }
+  //Pour supprimer un post
+  // const handleDeletePost = async (id: string) => {
+  //   if (!confirm("Êtes-vous sûr de vouloir supprimer ce post ?")) return;
+
+  //   try {
+  //     const res = await fetchWithAuth(`http://localhost:3001/api/posts/${id}`, {
+  //       method: "DELETE",
+  //     });
+
+  //     if (res.ok) {
+  //       setPosts((prevPosts) => prevPosts.filter((post) => post.id !== id));
+  //     } else {
+  //       const error = await res.json();
+  //       console.error("❌ Erreur lors de la suppression :", error);
+  //     }
+  //   } catch (err) {
+  //     console.error("❌ Erreur réseau :", err);
+  //   }
+  // };
+
+  const handleCancelEdit = () => {
+    setEditingPostId(null);
+    setEditTitle("");
+    setEditContent("");
   };
+
+  //Pour mettre à jour les modifications
+  const handleUpdatePost = async (id: string) => {
+  try {
+    const res = await fetchWithAuth(`http://localhost:3001/api/posts/modify/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: editTitle,
+        content: editContent,
+      }),
+    });
+
+    if (res.ok) {
+      const updatedPost = await res.json();
+      // Mettre à jour localement la liste des posts
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === id ? { ...post, title: updatedPost.title, content: updatedPost.content } : post
+        )
+      );
+      handleCancelEdit(); // Quitte le mode édition
+    } else {
+      const error = await res.json();
+      console.error("❌ Erreur lors de la mise à jour :", error);
+    }
+  } catch (err) {
+    console.error("❌ Erreur réseau :", err);
+  }
+};
+
+
+const confirmDeletePost = async () => {
+  if (!postToDelete) return;
+
+  try {
+    const res = await fetchWithAuth(`http://localhost:3001/api/posts/${postToDelete}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      console.log("✅ Post supprimé sur le serveur :", postToDelete);
+      setPosts((prev) => prev.filter((post) => String(post.id) !== String(postToDelete)));
+    } else {
+      const err = await res.json();
+      console.error("❌ Erreur backend :", err);
+    }
+  } catch (error) {
+    console.error("❌ Erreur réseau :", error);
+  } finally {
+    setPostToDelete(null);
+  }
+};
+
+
 
   const handleLogout = () => {
     logout();
@@ -135,39 +208,64 @@ useEffect(() => {
       <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Mes posts</h2>
       {posts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((post) => (
-            <div key={post.id} className="bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md">
-              {editingPostId === post.id ? (
-                <>
-                  <input
-                    type="text"
-                    value={editTitle}
-                    onChange={(e) => setEditTitle(e.target.value)}
-                    className="w-full mb-2 p-2 border rounded"
-                  />
-                  <textarea
-                    value={editContent}
-                    onChange={(e) => setEditContent(e.target.value)}
-                    className="w-full mb-2 p-2 border rounded"
-                  />
-                  <div className="flex justify-end space-x-2">
-                    <button onClick={handleCancelEdit} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Annuler</button>
-                    <button onClick={() => handleUpdatePost(post.id)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Valider</button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h3 className="text-xl font-semibold">{post.title}</h3>
-                  <p className="text-sm text-gray-600 mb-3">{post.content.substring(0, 100)}...</p>
-                  <div className="flex justify-end space-x-2">
-                    <button onClick={() => startEdit(post)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Modifier</button>
-                    <button onClick={() => setPostToDelete(post.id)} className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black">Supprimer</button>
-                  </div>
-                </>
-              )}
+  {posts.map((post) => {
+    console.log("Rendering post with ID:", post.id); // <-- Ajout ici
+
+    return (
+      <div key={String(post.id)} className="bg-gray-50 p-4 rounded-lg shadow-sm border hover:shadow-md">
+        {editingPostId === post.id ? (
+          <>
+            <input
+              type="text"
+              value={editTitle}
+              onChange={(e) => setEditTitle(e.target.value)}
+              className="w-full mb-2 p-2 border rounded"
+            />
+            <textarea
+              value={editContent}
+              onChange={(e) => setEditContent(e.target.value)}
+              className="w-full mb-2 p-2 border rounded"
+            />
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={handleCancelEdit}
+                className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={() => handleUpdatePost(post.id)}
+                className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
+              >
+                valider
+              </button>
             </div>
-          ))}
-        </div>
+          </>
+        ) : (
+          <>
+            <h3 className="text-xl font-semibold">{post.title}</h3>
+            <p className="text-sm text-gray-600 mb-3">{post.content.substring(0, 100)}...</p>
+            <div className="flex justify-end space-x-2">
+              <button
+                onClick={() => startEdit(post)}
+                className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
+              >
+                Modifier
+              </button>
+              <button
+                onClick={() => setPostToDelete(post.id)}
+                className="px-3 py-1 rounded bg-black text-white hover:bg-orange-300 hover:text-black"
+              >
+                Supprimer
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    );
+  })}
+</div>
+
       ) : (
         <p className="text-gray-600">Vous n'avez pas encore de posts.</p>
       )}
@@ -184,18 +282,45 @@ useEffect(() => {
 </main>
 
 
-        {postToDelete && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full">
-              <h3 className="text-xl font-bold mb-4">Supprimer ce post ?</h3>
-              <p className="text-gray-700 mb-6">Cette action est irréversible. Voulez-vous continuer ?</p>
-              <div className="flex justify-end space-x-4">
-                <button onClick={() => setPostToDelete(null)} className="px-4 py-2 rounded-lg bg-gray-200">Annuler</button>
-                <button onClick={confirmDeletePost} className="px-4 py-2 rounded-lg bg-black text-white hover:bg-orange-300 hover:text-black">Supprimer</button>
-              </div>
-            </div>
-          </div>
-        )}
+     {postToDelete && (
+  <div
+    className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
+    onClick={() => setPostToDelete(null)} // Fermer si clic en dehors
+  >
+    <div
+      className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full z-50"
+      onClick={(e) => e.stopPropagation()} // Empêche fermeture si clic sur la boîte
+      role="dialog"
+      aria-modal="true"
+    >
+      <h3 className="text-xl font-bold mb-4">Supprimer ce post ?</h3>
+      <p className="text-gray-700 mb-6">
+        Cette action est <span className="font-semibold text-red-600">irréversible</span>. Voulez-vous continuer ?
+      </p>
+      <div className="flex justify-end space-x-4">
+        <button
+          onClick={() => {
+            console.log("Annulation de la suppression");
+            setPostToDelete(null);
+          }}
+          className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+        >
+          Annuler
+        </button>
+        <button
+          onClick={() => {
+            console.log("Suppression confirmée pour :", postToDelete);
+            confirmDeletePost();
+          }}
+          className="px-4 py-2 rounded-lg bg-black text-white hover:bg-orange-300 hover:text-black transition"
+        >
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
         {showLogoutModal && (
           <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
