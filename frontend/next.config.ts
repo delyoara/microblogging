@@ -7,6 +7,7 @@ const nextConfig = {
       "unsplash.com",         
       "via.placeholder.com", 
       "media.istockphoto.com"
+  
     ]
   },
 };

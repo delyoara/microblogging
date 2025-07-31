@@ -359,7 +359,7 @@ router.delete("/:id", async (req, res) => {
 
 
 // GET /api/posts/all-posts
-router.get("/tip-posts", async (req, res) => {
+router.get("/top-posts", async (req, res) => {
   const { theme } = req.query;
 
    try {
